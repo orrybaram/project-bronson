@@ -2,15 +2,15 @@ import * as React from "react";
 import * as S from "./styles";
 
 type PropsType = {
-  bellyColor: string;
-  coatColor: string;
+  underCoat: string;
+  baseCoat: string;
 };
 
 const Dog = (props: PropsType) => {
-  const { bellyColor, coatColor } = props;
+  const { underCoat, baseCoat } = props;
 
   return (
-    <S.Wrapper bellyColor={bellyColor} coatColor={coatColor}>
+    <S.Wrapper underCoat={underCoat} baseCoat={baseCoat}>
       <S.LeftEar />
       <S.RightEar />
       <S.Head>

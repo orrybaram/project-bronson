@@ -1,19 +1,19 @@
 import {
   backgroundColors,
-  bellyColor,
-  coatColor,
-  secondaryCoatColor,
-  tertiaryCoatColor
-} from "./dogColors";
+  underCoat,
+  baseCoat,
+  secondaryBaseCoat,
+  tertiaryBaseCoat
+} from "./getColors";
 import { names } from './names';
 
 type ValuesType = {
   backgroundColor: number;
-  bellyColor: number;
-  coatColor: number;
+  underCoat: number;
+  baseCoat: number;
   hasSpots: boolean;
-  secondaryCoatColor: number;
-  tertiaryCoatColor: number;
+  secondaryBaseCoat: number;
+  tertiaryBaseCoat: number;
   name: number,
 };
 
@@ -28,13 +28,19 @@ const getProbability = (consequent: number) => {
   return getRandomNumber(consequent) === 1;
 };
 
+
+// TODO: steps
+// 1. Roll D20 - if critical hit, Roll for special character, if not continue.
+// 2. Roll for base color
+// 3. Generate  underCoat, secondary colors, tertiary color, accent color, name
+
 const generateValues = () => ({
   backgroundColor: getRandomArrayValue(backgroundColors),
-  bellyColor: getRandomArrayValue(bellyColor),
-  coatColor: getRandomArrayValue(coatColor),
+  underCoat: getRandomArrayValue(underCoat),
+  baseCoat: getRandomArrayValue(baseCoat),
   hasSpots: getProbability(5),
-  secondaryCoatColor: getRandomArrayValue(secondaryCoatColor),
-  tertiaryCoatColor: getRandomArrayValue(tertiaryCoatColor),
+  secondaryBaseCoat: getRandomArrayValue(secondaryBaseCoat),
+  tertiaryBaseCoat: getRandomArrayValue(tertiaryBaseCoat),
   name: getRandomArrayValue(names)
 });
 
@@ -44,11 +50,11 @@ export default () => {
   return {
     data: {
       backgroundColor: backgroundColors[values.backgroundColor],
-      bellyColor: bellyColor[values.bellyColor],
-      coatColor: coatColor[values.coatColor],
+      underCoat: underCoat[values.underCoat],
+      baseCoat: baseCoat[values.baseCoat],
       hasSpots: values.hasSpots,
-      secondaryCoatColor: secondaryCoatColor[values.secondaryCoatColor],
-      tertiaryCoatColor: tertiaryCoatColor[values.tertiaryCoatColor],
+      secondaryBaseCoat: secondaryBaseCoat[values.secondaryBaseCoat],
+      tertiaryBaseCoat: tertiaryBaseCoat[values.tertiaryBaseCoat],
       name: names[values.name],
     },
     meta: {

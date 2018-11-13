@@ -1,12 +1,12 @@
 export interface BodyColorsType {
-  bellyColor: string;
-  coatColor: string;
+  underCoat: string;
+  baseCoat: string;
 }
 
 export interface DataType extends BodyColorsType {
   hasSpots: boolean;
-  secondaryCoatColor: string;
-  tertiaryCoatColor: string;
+  secondaryBaseCoat: string;
+  tertiaryBaseCoat: string;
 }
 
 export type PropsType = {
