@@ -83,7 +83,6 @@ export const Torso = styled.div`
   height: 50px;
   width: 120px;
   position: relative;
-  z-index: 1;
 `;
 
 export const Body = styled.div`

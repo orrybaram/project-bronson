@@ -15,7 +15,7 @@ const getColorVariants = (colorArray: string[], levels: number[]) => {
 const getBackgroundColors = () => {
   return getColorVariants(
     ["red", "orange", "yellow", "green", "blue", "purple"],
-    [20, 30]
+    [20]
   );
 };
 
@@ -29,7 +29,7 @@ const getBellyColors = () => {
 const getCoatColors = () => {
   return getColorVariants(
     ["red", "orange", "yellow", "neutral"],
-    [0, 40, 50, 60, 70, 80, 90, 100]
+    [40, 50, 60, 70, 80, 90, 100]
   );
 }
 
