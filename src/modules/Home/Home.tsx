@@ -7,12 +7,14 @@ const { data, meta } = getGeneratedValues();
 
 const {
   backgroundColor,
-  ...restData
+  name,
+  ...dogData
 } = data;
 
 
 const Main = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: ${backgroundColor};
@@ -20,10 +22,16 @@ const Main = styled.div`
   height: 100vh;
 `;
 
+const Name = styled.h4`
+  margin-top: 40px;
+  opacity: 0.3;
+`;
+
 const Home = () => {
   return (
     <Main>
-      <Dog data={{ ...restData }} />
+      <Dog data={{ ...dogData }} />
+      <Name>{name}</Name>
     </Main>
   );
 };

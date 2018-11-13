@@ -16,6 +16,8 @@ const Dog = (props: PropsType) => {
       <S.Head>
         <S.LeftEye />
         <S.RightEye />
+        <S.Nose />
+        <S.Tongue />
       </S.Head>
     </S.Wrapper>
   );

@@ -1,35 +1,56 @@
 import styled from "react-emotion";
 import { BodyColorsType } from "../types";
+import colors from "../../../../colors";
 
 const Ear = styled.div`
   position: absolute;
   border-radius: 83px 82px 65px 64px / 106px 127px 33px 27px;
-  width: 30px;
-  height: 40px;
-  top: -18px;
+  width: 35px;
+  height: 50px;
+  top: -15px;
+`;
+
+export const Tongue = styled.div`
+  position: absolute;
+  border-radius: 0 0 10px 10px;
+  background-color: ${colors.red[20]};
+  width: 12px;
+  height: 11px;
+  top: 60px;
+  left: 22px;
 `;
 
 export const LeftEar = styled(Ear)`
-  left: -10px;
-  transform: rotate(-30deg);
+  left: -20px;
+  transform: rotate(-50deg);
+`;
+
+export const Nose = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background-color: ${colors.neutral[90]};
+  width: 15px;
+  height: 10px;
+  bottom: 3px;
+  left: 17px;
 `;
 
 export const RightEar = styled(Ear)`
-  right: -10px;
-  transform: rotate(30deg);
+  right: -20px;
+  transform: rotate(50deg);
 `;
 
 const Eye = styled.div`
   position: absolute;
   border-radius: 50%;
-  background-color: black;
-  width: 15px;
-  height: 15px;
-  top: 28px;
+  background-color: ${colors.neutral[90]};
+  width: 12px;
+  height: 12px;
+  top: 30px;
 
   &::before {
     top: 4px;
-    right: 10px;
+    left: 1px;
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -44,7 +65,7 @@ export const LeftEye = styled(Eye)`
 `;
 
 export const RightEye = styled(Eye)`
-  right: 10px;
+  right: 14px;
 `;
 
 export const Head = styled.div`
@@ -66,6 +87,6 @@ export const Wrapper = styled.div`
   ${LeftEar}, ${RightEar} {
     background-color: ${({ bellyColor }: BodyColorsType) => bellyColor};
     box-shadow: ${({ coatColor }: BodyColorsType) =>
-        `inset 0px 7px 0 3px${coatColor}`};
+      `inset 0px 4px 0 7px ${coatColor}`};
   }
 `;

@@ -38,21 +38,21 @@ export const Leg = styled.div`
   position: absolute;
   bottom: -10px;
   height: 10px;
-  width: 15px;
+  width: 18px;
 
   &::after {
     content: "";
     position: absolute;
     bottom: -5px;
     height: 5px;
-    width: 15px;
+    width: 18px;
     border-radius: 0 0 4px 4px;
   }
 `;
 
 export const Tail = styled.div`
   position: absolute;
-  right: -3px;
+  right: -5px;
   height: 10px;
   width: 19px;
   border-radius: 5px;

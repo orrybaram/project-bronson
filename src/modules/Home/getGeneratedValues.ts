@@ -4,7 +4,8 @@ import {
   coatColor,
   secondaryCoatColor,
   tertiaryCoatColor
-} from "./colors";
+} from "./dogColors";
+import { names } from './names';
 
 type ValuesType = {
   backgroundColor: number;
@@ -13,6 +14,7 @@ type ValuesType = {
   hasSpots: boolean;
   secondaryCoatColor: number;
   tertiaryCoatColor: number;
+  name: number,
 };
 
 const getRandomNumber = (range: number) => Math.floor(Math.random() * range);
@@ -32,7 +34,8 @@ const generateValues = () => ({
   coatColor: getRandomArrayValue(coatColor),
   hasSpots: getProbability(5),
   secondaryCoatColor: getRandomArrayValue(secondaryCoatColor),
-  tertiaryCoatColor: getRandomArrayValue(tertiaryCoatColor)
+  tertiaryCoatColor: getRandomArrayValue(tertiaryCoatColor),
+  name: getRandomArrayValue(names)
 });
 
 export default () => {
@@ -45,7 +48,8 @@ export default () => {
       coatColor: coatColor[values.coatColor],
       hasSpots: values.hasSpots,
       secondaryCoatColor: secondaryCoatColor[values.secondaryCoatColor],
-      tertiaryCoatColor: tertiaryCoatColor[values.tertiaryCoatColor]
+      tertiaryCoatColor: tertiaryCoatColor[values.tertiaryCoatColor],
+      name: names[values.name],
     },
     meta: {
       values
