@@ -1,0 +1,25 @@
+{
+  "name": "project-bronson",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html && cp manifest.json dist/manifest.json"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-emotion": "^9.2.11",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "1.9",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "@rebass/grid": "^6.0.0-4",
+    "emotion": "^9.2.12",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-emotion": "^9.2.12"
+  }
+}
