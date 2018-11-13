@@ -2,14 +2,17 @@ import * as React from "react";
 import styled from "react-emotion";
 import getGeneratedValues from "./getGeneratedValues";
 
+const { data, meta } = getGeneratedValues();
+
 const {
   backgroundColor,
-  coatColor,
-  secondaryCoatColor,
-  tertiaryCoatColor,
   bellyColor,
-  hasSpots
-} = getGeneratedValues();
+  coatColor,
+  hasSpots,
+  secondaryCoatColor,
+  tertiaryCoatColor
+} = data;
+
 
 const Main = styled.div`
   display: flex;
