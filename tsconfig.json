@@ -3,6 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "es6",
     "moduleResolution": "node",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "strict": true
   }
 }

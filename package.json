@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@rebass/grid": "^6.0.0-4",
+    "@types/react-dom": "^16.0.9",
     "emotion": "^9.2.12",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
