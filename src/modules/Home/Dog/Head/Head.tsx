@@ -11,7 +11,7 @@ type PropsType = {
 
 
 
-const Dog = (props: PropsType) => {
+const Head = (props: PropsType) => {
   const { underCoat, baseCoat, eyeColor } = props;
 
   return (
@@ -21,7 +21,7 @@ const Dog = (props: PropsType) => {
       <S.Head>
         <S.AnimatedTongue />
         <S.Face>
-          <S.LeftEye />
+          <S.AnimatedLeftEye />
           <S.RightEye />
           <S.Nose />
         </S.Face>
@@ -30,4 +30,4 @@ const Dog = (props: PropsType) => {
   );
 };
 
-export default Dog;
+export default Head;

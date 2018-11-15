@@ -1,8 +1,12 @@
-import * as React from 'react';
+import * as React from "react";
 import styled from "react-emotion";
-import { Keyframes } from 'react-spring';
+import { Keyframes } from "react-spring";
 import { HeadColorsType } from "../types";
 import colors from "../../../../colors";
+
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const getRandomRange = (min: number, max: number) =>
+  Math.random() * (max - min) + min;
 
 const Ear = styled.div`
   position: absolute;
@@ -45,8 +49,9 @@ export const Face = styled.div`
   border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
   overflow: hidden;
 
-  &::before, &::after {
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     position: absolute;
     border-radius: 50%;
     height: 55px;
@@ -61,7 +66,7 @@ export const Face = styled.div`
   &::after {
     right: -17px;
   }
-`
+`;
 
 export const RightEar = styled(Ear)`
   right: -20px;
@@ -97,6 +102,31 @@ export const RightEye = styled(Eye)`
   right: 14px;
 `;
 
+const eyeWinkLoop = async next => {
+  while (true) {
+    const winkInterval = getRandomRange(1000, 10000)
+    await next({ opacity: 1});
+    await delay(winkInterval);
+
+    await next({
+      transform: "matrix(1, 0, 0, 0.1, 0, 0);",
+      from: { transform: "matrix(1, 0, 0, 1, 0, 0);" },
+      config: { duration: 100 }
+    });
+    await next({
+      transform: "matrix(1, 0, 0, 1, 0, 0);",
+      from: { transform: "matrix(1, 0, 0, 0.1, 0, 0);" },
+      config: { duration: 100 }
+    });
+  }
+};
+
+const EyeWink = Keyframes.Spring(eyeWinkLoop);
+
+export const AnimatedLeftEye = () => (
+  <EyeWink>{props => <LeftEye css={props} />}</EyeWink>
+);
+
 export const Head = styled.div`
   position: relative;
   height: 60px;
@@ -104,18 +134,28 @@ export const Head = styled.div`
   border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
 `;
 
-const AnimateTongue = Keyframes.Spring(async next => {
+const tongueLoop = async next => {
   while (true) {
-    await next({ transform: 'translateY(10px)', from: { transform: 'translateY(8px)' }, reset: false });
-    await next({ transform: 'translateY(8px)', from: { transform: 'translateY(10px)' }, reset: true });
+    await next({
+      transform: "translateY(10px)",
+      from: { transform: "translateY(8px)" },
+      reset: false
+    });
+    await next({
+      transform: "translateY(8px)",
+      from: { transform: "translateY(10px)" },
+      reset: true
+    });
   }
-}
+};
+
+const AnimateTongue = Keyframes.Spring(tongueLoop);
 
 export const AnimatedTongue = () => (
   <AnimateTongue config={{ duration: 150 }}>
     {props => <Tongue css={props} />}
   </AnimateTongue>
-)
+);
 
 export const Wrapper = styled.div`
   position: absolute;
@@ -128,7 +168,8 @@ export const Wrapper = styled.div`
 
   ${Face} {
     background-color: ${({ underCoat }: HeadColorsType) => underCoat};
-    &::before, &::after {
+    &::before,
+    &::after {
       background-color: ${({ baseCoat }: HeadColorsType) => baseCoat};
     }
   }
