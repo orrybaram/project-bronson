@@ -33,7 +33,33 @@ export const Nose = styled.div`
   height: 10px;
   bottom: 3px;
   left: 17px;
+  z-index: 1;
 `;
+
+export const Face = styled.div`
+  position: relative;
+  height: 60px;
+  width: 60px;
+  border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
+  overflow: hidden;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    height: 55px;
+    width: 48px;
+    top: -2px;
+  }
+
+  &::before {
+    left: -21px;
+  }
+
+  &::after {
+    right: -17px;
+  }
+`
 
 export const RightEar = styled(Ear)`
   right: -20px;
@@ -47,6 +73,7 @@ const Eye = styled.div`
   width: 12px;
   height: 12px;
   top: 30px;
+  z-index: 1;
 
   &::before {
     top: 4px;
@@ -81,7 +108,14 @@ export const Wrapper = styled.div`
   left: -9px;
 
   ${Head} {
-    background-color: ${({ baseCoat }: HeadColorsType) => baseCoat};
+    background-color: ${({ underCoat }: HeadColorsType) => underCoat};
+  }
+
+  ${Face} {
+    background-color: ${({ underCoat }: HeadColorsType) => underCoat};
+    &::before, &::after {
+      background-color: ${({ baseCoat }: HeadColorsType) => baseCoat};
+    }
   }
 
   ${LeftEar}, ${RightEar} {

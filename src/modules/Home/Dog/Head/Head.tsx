@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as S from "./styles";
+import * as S from "./Head.styles";
 
 type PropsType = {
   underCoat: string;
@@ -15,9 +15,11 @@ const Dog = (props: PropsType) => {
       <S.LeftEar />
       <S.RightEar />
       <S.Head>
-        <S.LeftEye />
-        <S.RightEye />
-        <S.Nose />
+        <S.Face>
+          <S.LeftEye />
+          <S.RightEye />
+          <S.Nose />
+        </S.Face>
         <S.Tongue />
       </S.Head>
     </S.Wrapper>

@@ -3,13 +3,16 @@ import colors from "../../colors";
 const { red, orange, yellow, green, blue, purple, neutral } = colors;
 
 const getColorVariants = (colorArray: string[], levels: number[]) => {
-  return colorArray.reduce((acc: string[], color: string) => {
-    const colorLevels = levels.map(level => {
-      return colors[color][level];
-    });
+  return colorArray.reduce(
+    (acc: { hex: string; color: string }[], color: string) => {
+      const colorLevels = levels.map(level => {
+        return { hex: colors[color][level], color };
+      });
 
-    return [...acc, ...colorLevels];
-  }, []);
+      return [...acc, ...colorLevels];
+    },
+    []
+  );
 };
 
 const getBackgroundColors = () => {
@@ -19,30 +22,23 @@ const getBackgroundColors = () => {
   );
 };
 
-const getunderCoats = () => {
-  return getColorVariants(
-    ["orange", "yellow", "neutral"],
-    [0]
-  );
-}
+export const getUnderCoat = (baseColor: string) => {
+  return colors[baseColor][0];
+};
 
-const getbaseCoats = () => {
+const getBaseCoats = () => {
   return getColorVariants(
     ["orange", "yellow", "neutral"],
     [40, 50, 60, 70, 80]
   );
-}
+};
 
 const getEyeColors = () => {
-  return getColorVariants(
-    ["neutral"],
-    [90]
-  );
-}
+  return getColorVariants(["neutral"], [90]);
+};
 
 export const backgroundColors = getBackgroundColors();
-export const baseCoat = getbaseCoats();
+export const baseCoat = getBaseCoats();
 export const eyeColors = getEyeColors();
-export const secondaryBaseCoat = getbaseCoats();
-export const tertiaryBaseCoat = getbaseCoats();
-export const underCoat = getunderCoats();
+export const secondaryBaseCoat = getBaseCoats();
+export const tertiaryBaseCoat = getBaseCoats();

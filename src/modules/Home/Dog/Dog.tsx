@@ -1,6 +1,6 @@
 import * as React from "react";
 import { PropsType } from "./types";
-import * as S from "./styles";
+import * as S from "./Dog.styles";
 import Head from "./Head";
 
 const Dog = ({ data }: PropsType) => {

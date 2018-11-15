@@ -11,8 +11,6 @@ const {
   ...dogData
 } = data;
 
-console.log(data);
-
 const Main = styled.div`
   display: flex;
   flex-direction: column;
