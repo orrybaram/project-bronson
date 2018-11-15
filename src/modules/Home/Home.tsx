@@ -84,8 +84,8 @@ export default class Home extends React.Component<PropsType, StateType> {
       <Main backgroundColor={backgroundColor}>
         <Dog data={{ ...dogData }} />
         <Name>{name}</Name>
-        <button onClick={this.saveDog(meta.hash, name)}>Save</button>
-        <List loadDog={this.loadDog} savedDogs={savedDogs} />
+        {/* <button onClick={this.saveDog(meta.hash, name)}>Save</button> */}
+        {/* <List loadDog={this.loadDog} savedDogs={savedDogs} /> */}
       </Main>
     );
   }

@@ -1,4 +1,6 @@
+import * as React from 'react';
 import styled from "react-emotion";
+import { Keyframes } from 'react-spring';
 import { HeadColorsType } from "../types";
 import colors from "../../../../colors";
 
@@ -15,8 +17,8 @@ export const Tongue = styled.div`
   border-radius: 0 0 10px 10px;
   background-color: ${colors.red[20]};
   width: 12px;
-  height: 11px;
-  top: 60px;
+  height: 20px;
+  top: 40px;
   left: 22px;
 `;
 
@@ -101,6 +103,19 @@ export const Head = styled.div`
   width: 60px;
   border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
 `;
+
+const AnimateTongue = Keyframes.Spring(async next => {
+  while (true) {
+    await next({ transform: 'translateY(10px)', from: { transform: 'translateY(8px)' }, reset: false });
+    await next({ transform: 'translateY(8px)', from: { transform: 'translateY(10px)' }, reset: true });
+  }
+}
+
+export const AnimatedTongue = () => (
+  <AnimateTongue config={{ duration: 150 }}>
+    {props => <Tongue css={props} />}
+  </AnimateTongue>
+)
 
 export const Wrapper = styled.div`
   position: absolute;
