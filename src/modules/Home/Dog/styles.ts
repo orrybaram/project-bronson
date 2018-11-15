@@ -89,18 +89,18 @@ export const Body = styled.div`
   position: relative;
 
   ${Belly} {
-    background-color: ${({ bellyColor }: BodyColorsType) => bellyColor};
+    background-color: ${({ underCoat }: BodyColorsType) => underCoat};
   }
 
   ${Torso}, ${Tail} {
-    background-color: ${({ coatColor }: BodyColorsType) => coatColor};
+    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
   }
 
   ${Leg1}, ${Leg2}, ${Leg3}, ${Leg4} {
-    background-color: ${({ coatColor }: BodyColorsType) => coatColor};
+    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
 
     &::after {
-      background-color: ${({ bellyColor }: BodyColorsType) => bellyColor};
+      background-color: ${({ underCoat }: BodyColorsType) => underCoat};
     }
   }
 `;

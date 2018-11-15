@@ -4,23 +4,23 @@ import * as S from "./styles";
 import Head from './Head';
 
 const Dog = ({ data }: PropsType) => {
-  const { bellyColor, coatColor, hasSpots, secondaryCoatColor } = data;
+  const { underCoat, baseCoat, hasSpots, secondaryBaseCoat } = data;
 
   return (
     <S.Wrapper>
       <S.Shadow />
-      <S.Body coatColor={coatColor} bellyColor={bellyColor}>
+      <S.Body baseCoat={baseCoat} underCoat={underCoat}>
         <S.Tail />
         <S.Leg1 />
         <S.Leg2 />
         <S.Leg3 />
         <S.Leg4 />
         <S.Torso>
-          <S.Belly color={bellyColor} />
-          {hasSpots && <S.Spots color={secondaryCoatColor} />}
+          <S.Belly color={underCoat} />
+          {hasSpots && <S.Spots color={secondaryBaseCoat} />}
         </S.Torso>
       </S.Body>
-      <Head coatColor={coatColor} bellyColor={bellyColor} />
+      <Head baseCoat={baseCoat} underCoat={underCoat} />
     </S.Wrapper>
   );
 };

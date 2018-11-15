@@ -81,12 +81,12 @@ export const Wrapper = styled.div`
   left: -9px;
 
   ${Head} {
-    background-color: ${({ coatColor }: BodyColorsType) => coatColor};
+    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
   }
 
   ${LeftEar}, ${RightEar} {
-    background-color: ${({ bellyColor }: BodyColorsType) => bellyColor};
-    box-shadow: ${({ coatColor }: BodyColorsType) =>
-      `inset 0px 4px 0 7px ${coatColor}`};
+    background-color: ${({ underCoat }: BodyColorsType) => underCoat};
+    box-shadow: ${({ baseCoat }: BodyColorsType) =>
+      `inset 0px 4px 0 7px ${baseCoat}`};
   }
 `;

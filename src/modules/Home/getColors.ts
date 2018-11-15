@@ -19,14 +19,14 @@ const getBackgroundColors = () => {
   );
 };
 
-const getBellyColors = () => {
+const getunderCoats = () => {
   return getColorVariants(
     ["orange", "yellow", "neutral"],
     [0]
   );
 }
 
-const getCoatColors = () => {
+const getbaseCoats = () => {
   return getColorVariants(
     ["orange", "yellow", "neutral"],
     [40, 50, 60, 70, 80]
@@ -34,8 +34,7 @@ const getCoatColors = () => {
 }
 
 export const backgroundColors = getBackgroundColors();
-
-export const bellyColor = getBellyColors();
-export const coatColor = getCoatColors();
-export const secondaryCoatColor = getCoatColors();
-export const tertiaryCoatColor = getCoatColors();
+export const underCoat = getunderCoats();
+export const baseCoat = getbaseCoats();
+export const secondaryBaseCoat = getbaseCoats();
+export const tertiaryBaseCoat = getbaseCoats();
