@@ -4,13 +4,14 @@ import * as S from "./styles";
 type PropsType = {
   underCoat: string;
   baseCoat: string;
+  eyeColor: string;
 };
 
 const Dog = (props: PropsType) => {
-  const { underCoat, baseCoat } = props;
+  const { underCoat, baseCoat, eyeColor } = props;
 
   return (
-    <S.Wrapper underCoat={underCoat} baseCoat={baseCoat}>
+    <S.Wrapper underCoat={underCoat} baseCoat={baseCoat} eyeColor={eyeColor}>
       <S.LeftEar />
       <S.RightEar />
       <S.Head>

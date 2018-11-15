@@ -1,64 +1,68 @@
 import {
   backgroundColors,
-  underCoat,
   baseCoat,
+  eyeColors,
   secondaryBaseCoat,
-  tertiaryBaseCoat
+  tertiaryBaseCoat,
+  underCoat,
 } from "./getColors";
-import { names } from './names';
+import { names } from "./names";
+import craftedDogs from './craftedDogs';
 
 type ValuesType = {
-  backgroundColor: number;
-  underCoat: number;
-  baseCoat: number;
+  backgroundColor: string;
+  underCoat: string;
+  baseCoat: string;
   hasSpots: boolean;
-  secondaryBaseCoat: number;
-  tertiaryBaseCoat: number;
-  name: number,
+  secondaryBaseCoat: string;
+  tertiaryBaseCoat: string;
+  name: string;
+  eyeColor: string,
 };
 
-const getRandomNumber = (range: number) => Math.floor(Math.random() * range);
+const createHash = (values: Object) => btoa(JSON.stringify(values));
 
-const getRandomArrayValue = (array: Array<string>) => {
-  const randomIndex = getRandomNumber(array.length);
+const getRandomNumber = (range: number) => (Math.floor(Math.random() * range) + 1);
+
+const getRandomArrayValue = (array: Array<any>) => {
+  const randomIndex = getRandomNumber(array.length) - 1;
   return randomIndex;
 };
 
 const getProbability = (consequent: number) => {
-  return getRandomNumber(consequent) === 1;
+  return getRandomNumber(consequent) === consequent;
 };
 
-
-// TODO: steps
-// 1. Roll D20 - if critical hit, Roll for special character, if not continue.
-// 2. Roll for base color
-// 3. Generate  underCoat, secondary colors, tertiary color, accent color, name
-
 const generateValues = () => ({
-  backgroundColor: getRandomArrayValue(backgroundColors),
-  underCoat: getRandomArrayValue(underCoat),
-  baseCoat: getRandomArrayValue(baseCoat),
+  backgroundColor: backgroundColors[getRandomArrayValue(backgroundColors)],
+  underCoat: underCoat[getRandomArrayValue(underCoat)],
+  baseCoat: baseCoat[getRandomArrayValue(baseCoat)],
   hasSpots: getProbability(5),
-  secondaryBaseCoat: getRandomArrayValue(secondaryBaseCoat),
-  tertiaryBaseCoat: getRandomArrayValue(tertiaryBaseCoat),
-  name: getRandomArrayValue(names)
+  secondaryBaseCoat: secondaryBaseCoat[getRandomArrayValue(secondaryBaseCoat)],
+  tertiaryBaseCoat: tertiaryBaseCoat[getRandomArrayValue(tertiaryBaseCoat)],
+  name: names[getRandomArrayValue(names)],
+  eyeColor: eyeColors[getRandomArrayValue(eyeColors)],
 });
 
 export default () => {
-  const values: ValuesType = generateValues();
+  // TODO: steps
+  // 1. Roll D20 - if critical hit, Roll for special character, if not continue.
+  // 2. Roll for base color
+  // 3. Generate  underCoat, secondary colors, tertiary color, accent color, name
+
+  const isCriticalHit = getProbability(20);
+
+  const values = isCriticalHit
+    ? craftedDogs[getRandomArrayValue(craftedDogs)]
+    : generateValues();
+
+  const hash = createHash(values);
 
   return {
-    data: {
-      backgroundColor: backgroundColors[values.backgroundColor],
-      underCoat: underCoat[values.underCoat],
-      baseCoat: baseCoat[values.baseCoat],
-      hasSpots: values.hasSpots,
-      secondaryBaseCoat: secondaryBaseCoat[values.secondaryBaseCoat],
-      tertiaryBaseCoat: tertiaryBaseCoat[values.tertiaryBaseCoat],
-      name: names[values.name],
-    },
+    data: values,
     meta: {
-      values
+      values,
+      hash
     }
   };
 };

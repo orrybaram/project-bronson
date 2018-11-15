@@ -33,8 +33,16 @@ const getbaseCoats = () => {
   );
 }
 
+const getEyeColors = () => {
+  return getColorVariants(
+    ["neutral"],
+    [90]
+  );
+}
+
 export const backgroundColors = getBackgroundColors();
-export const underCoat = getunderCoats();
 export const baseCoat = getbaseCoats();
+export const eyeColors = getEyeColors();
 export const secondaryBaseCoat = getbaseCoats();
 export const tertiaryBaseCoat = getbaseCoats();
+export const underCoat = getunderCoats();

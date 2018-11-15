@@ -1,5 +1,5 @@
 import styled from "react-emotion";
-import { BodyColorsType } from "../types";
+import { HeadColorsType } from "../types";
 import colors from "../../../../colors";
 
 const Ear = styled.div`
@@ -81,12 +81,16 @@ export const Wrapper = styled.div`
   left: -9px;
 
   ${Head} {
-    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
+    background-color: ${({ baseCoat }: HeadColorsType) => baseCoat};
   }
 
   ${LeftEar}, ${RightEar} {
-    background-color: ${({ underCoat }: BodyColorsType) => underCoat};
-    box-shadow: ${({ baseCoat }: BodyColorsType) =>
+    background-color: ${({ underCoat }: HeadColorsType) => underCoat};
+    box-shadow: ${({ baseCoat }: HeadColorsType) =>
       `inset 0px 4px 0 7px ${baseCoat}`};
+  }
+
+  ${LeftEye}, ${RightEye} {
+    background-color: ${({ eyeColor }: HeadColorsType) => eyeColor};
   }
 `;
