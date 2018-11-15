@@ -4,21 +4,11 @@ import {
   eyeColors,
   secondaryBaseCoat,
   tertiaryBaseCoat,
-  getUnderCoat,
+  getUnderCoat
 } from "./getColors";
 import { names } from "./names";
 import craftedDogs from "./craftedDogs";
-
-type ValuesType = {
-  backgroundColor: string;
-  underCoat: string;
-  baseCoat: string;
-  hasSpots: boolean;
-  secondaryBaseCoat: string;
-  tertiaryBaseCoat: string;
-  name: string;
-  eyeColor: string;
-};
+import { MetaType, ValuesType } from "./Home.types";
 
 const createHash = (values: Object) => btoa(JSON.stringify(values));
 
@@ -52,7 +42,7 @@ const generateValues = (baseColor: { hex: string; color: string }) => {
   };
 };
 
-export default () => {
+export default (): { data: ValuesType; meta: MetaType } => {
   // TODO: steps
   // 1. Roll D20 - if critical hit, Roll for special character, if not continue.
   // 2. Roll for base color
@@ -71,7 +61,6 @@ export default () => {
   return {
     data: values,
     meta: {
-      values,
       hash
     }
   };

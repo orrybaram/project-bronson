@@ -4,6 +4,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "jsx": "preserve",
-    "strict": true
+    "strict": true,
+    "lib": ["es2018", "dom"]
   }
 }

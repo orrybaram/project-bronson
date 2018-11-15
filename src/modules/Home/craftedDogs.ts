@@ -1,7 +1,5 @@
 import colors from '../../colors';
 
-console.log(colors);
-
 export default [
   {
     backgroundColor: colors.neutral[10],
