@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "react-emotion";
+import { debounce } from 'lodash';
 import getGeneratedValues from "./getGeneratedValues";
 import Dog from "./Dog";
 import { ValuesType, MetaType } from "./Home.types";
@@ -27,8 +28,14 @@ type StateType = {
   dog: {
     data: ValuesType;
     meta: MetaType;
+    excitementLevel: "low" | "high";
   };
-  savedDogs: { hash: string; name: string }[];
+  starredDogs: { hash: string; name: string }[];
+};
+
+const getDogsFromLocalStorage = () => {
+  const dogsJSON = localStorage.getItem("starredDogs") || "{}";
+  return JSON.parse(dogsJSON);
 };
 
 export default class Home extends React.Component<PropsType, StateType> {
@@ -40,27 +47,27 @@ export default class Home extends React.Component<PropsType, StateType> {
       meta
     }: { data: ValuesType; meta: MetaType } = getGeneratedValues();
 
-    const dogsJSON = localStorage.getItem("savedDogs") || "{}";
-    const savedDogs = JSON.parse(dogsJSON);
+    const dogsJSON = localStorage.getItem("starredDogs") || "{}";
+    const starredDogs = JSON.parse(dogsJSON);
 
     this.state = {
       dog: {
         data,
-        meta
+        meta,
+        excitementLevel: "low"
       },
-      savedDogs
+      starredDogs
     };
   }
 
   saveDog = (hash: string, name: string) => () => {
-    const dogsJSON = localStorage.getItem("savedDogs") || "{}";
-    const dogs = JSON.parse(dogsJSON);
+    const dogs = getDogsFromLocalStorage();
     dogs[hash] = name;
 
-    localStorage.setItem("savedDogs", JSON.stringify(dogs));
+    localStorage.setItem("starredDogs", JSON.stringify(dogs));
 
     this.setState({
-      savedDogs: dogs
+      starredDogs: dogs
     });
   };
 
@@ -69,23 +76,61 @@ export default class Home extends React.Component<PropsType, StateType> {
 
     this.setState({
       dog: {
+        ...this.state.dog,
         data: values,
         meta: { hash }
       }
     });
   };
 
+  deleteDog = (hash: string) => () => {
+    const { [hash]: deletedDog, ...dogs } = getDogsFromLocalStorage();
+    localStorage.setItem("starredDogs", JSON.stringify(dogs));
+
+    this.setState({
+      starredDogs: dogs
+    });
+  };
+
+  onDogClick = () => {
+    this.setState({
+      dog: {
+        ...this.state.dog,
+        excitementLevel: "high"
+      }
+    });
+
+    setTimeout(() => {
+      this.setState({
+        dog: {
+          ...this.state.dog,
+          excitementLevel: "low"
+        }
+      });
+    }, 5000);
+  };
+
+  debouncedOnDogClick = debounce(this.onDogClick, 500, {leading: true});
+
   render() {
-    const { dog, savedDogs } = this.state;
+    const { dog, starredDogs } = this.state;
     const { data, meta } = dog;
     const { backgroundColor, name, ...dogData } = data;
 
     return (
       <Main backgroundColor={backgroundColor}>
-        <Dog data={{ ...dogData }} />
+        <Dog
+          data={{ ...dogData }}
+          excitementLevel={this.state.dog.excitementLevel}
+          onClick={this.debouncedOnDogClick}
+        />
         <Name>{name}</Name>
-        {/* <button onClick={this.saveDog(meta.hash, name)}>Save</button> */}
-        {/* <List loadDog={this.loadDog} savedDogs={savedDogs} /> */}
+        {/* <button onClick={this.saveDog(meta.hash, name)}>⭐</button>
+        <List
+          loadDog={this.loadDog}
+          starredDogs={starredDogs}
+          deleteDog={this.deleteDog}
+        /> */}
       </Main>
     );
   }

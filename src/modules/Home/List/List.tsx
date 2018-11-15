@@ -1,16 +1,18 @@
 import * as React from "react";
 
 type PropsType = {
-  savedDogs: { hash: string; name: string }[];
-  loadDog: (hash: string) => () => void
+  starredDogs: { hash: string; name: string }[];
+  loadDog: (hash: string) => () => void;
+  deleteDog: (hash: string) => () => void;
 };
 
-const List = ({ savedDogs, loadDog }: PropsType) => (
+const List = ({ starredDogs, loadDog, deleteDog }: PropsType) => (
   <ul>
-    {Object.entries(savedDogs).map(([hash, name]) => {
+    {Object.entries(starredDogs).map(([hash, name]) => {
       return (
         <li key={hash}>
           <button onClick={loadDog(hash)}>{name}</button>
+          <button onClick={deleteDog(hash)}>x</button>
         </li>
       );
     })}

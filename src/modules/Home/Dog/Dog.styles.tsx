@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "react-emotion";
-import { BodyColorsType } from './types';
+import { BodyColorsType } from "./types";
 import { Keyframes } from "react-spring";
 
 export const Wrapper = styled.div`
@@ -62,27 +62,36 @@ export const Tail = styled.div`
   transform-origin: center left;
 `;
 
-const tailWagLoop = async next => {
+const tailWagLoop = (duration: number) => async next => {
   while (true) {
     await next({
       transform: "rotate(10deg)",
       from: { transform: "rotate(-10deg)" },
       reset: false,
-      config: { duration: 1500 }
+      config: { duration }
     });
     await next({
       transform: "rotate(-10deg)",
       from: { transform: "rotate(10deg)" },
       reset: true,
-      config: { duration: 1500 }
+      config: { duration }
     });
   }
-};
+});
 
-const TailWag = Keyframes.Spring(tailWagLoop);
+const TailWag = Keyframes.Spring({
+  "excitementLevel-low": tailWagLoop(1500),
+  "excitementLevel-high": tailWagLoop(200)
+});
 
-export const WaggingTail = () => (
-  <TailWag>{props => <Tail css={props} />}</TailWag>
+export const WaggingTail = ({
+  excitementLevel
+}: {
+  excitementLevel: "low" | "high";
+}) => (
+  <TailWag state={`excitementLevel-${excitementLevel}`}>
+    {props => <Tail css={props} />}
+  </TailWag>
 );
 
 export const Leg1 = styled(Leg)`

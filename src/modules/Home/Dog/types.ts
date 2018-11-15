@@ -18,4 +18,6 @@ export interface DataType extends BodyColorsType {
 
 export type PropsType = {
   data: DataType;
+  excitementLevel: 'low' | 'high';
+  onClick: () => void,
 };

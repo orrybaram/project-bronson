@@ -3,14 +3,14 @@ import { PropsType } from "./types";
 import * as S from "./Dog.styles";
 import Head from "./Head";
 
-const Dog = ({ data }: PropsType ) => {
+const Dog = ({ data, excitementLevel, onClick }: PropsType ) => {
   const { underCoat, baseCoat, hasSpots, secondaryBaseCoat, eyeColor } = data;
 
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={onClick}>
       <S.Shadow />
       <S.Body baseCoat={baseCoat} underCoat={underCoat}>
-        <S.WaggingTail />
+        <S.WaggingTail excitementLevel={excitementLevel}/>
         <S.Leg1 />
         <S.Leg2 />
         <S.Leg3 />
