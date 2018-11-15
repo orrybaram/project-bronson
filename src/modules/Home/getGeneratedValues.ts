@@ -32,7 +32,7 @@ const generateValues = (baseColor: { hex: string; color: string }) => {
     backgroundColor:
       backgroundColors[getRandomArrayValue(backgroundColors)].hex,
     underCoat: getUnderCoat(baseColor.color),
-    hasSpots: getProbability(5),
+    hasSpots: getProbability(1),
     secondaryBaseCoat:
       secondaryBaseCoat[getRandomArrayValue(secondaryBaseCoat)].hex,
     tertiaryBaseCoat:
