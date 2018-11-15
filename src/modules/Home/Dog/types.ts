@@ -20,4 +20,5 @@ export type PropsType = {
   data: DataType;
   excitementLevel: 'low' | 'high';
   onClick: () => void,
+  isAnimated: boolean,
 };

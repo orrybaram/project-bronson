@@ -29,6 +29,7 @@ type StateType = {
     data: ValuesType;
     meta: MetaType;
     excitementLevel: "low" | "high";
+    isAnimated: boolean,
   };
   starredDogs: { hash: string; name: string }[];
 };
@@ -54,7 +55,8 @@ export default class Home extends React.Component<PropsType, StateType> {
       dog: {
         data,
         meta,
-        excitementLevel: "low"
+        excitementLevel: "low",
+        isAnimated: true,
       },
       starredDogs
     };
@@ -78,7 +80,7 @@ export default class Home extends React.Component<PropsType, StateType> {
       dog: {
         ...this.state.dog,
         data: values,
-        meta: { hash }
+        meta: { hash },
       }
     });
   };
@@ -114,15 +116,16 @@ export default class Home extends React.Component<PropsType, StateType> {
 
   render() {
     const { dog, starredDogs } = this.state;
-    const { data, meta } = dog;
+    const { data, meta, isAnimated, excitementLevel } = dog;
     const { backgroundColor, name, ...dogData } = data;
 
     return (
       <Main backgroundColor={backgroundColor}>
         <Dog
           data={{ ...dogData }}
-          excitementLevel={this.state.dog.excitementLevel}
+          excitementLevel={excitementLevel}
           onClick={this.debouncedOnDogClick}
+          isAnimated={isAnimated}
         />
         <Name>{name}</Name>
         {/* <button onClick={this.saveDog(meta.hash, name)}>⭐</button>

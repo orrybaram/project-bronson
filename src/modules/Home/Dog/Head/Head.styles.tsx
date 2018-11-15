@@ -123,8 +123,8 @@ const eyeWinkLoop = async next => {
 
 const EyeWink = Keyframes.Spring(eyeWinkLoop);
 
-export const AnimatedLeftEye = () => (
-  <EyeWink>{props => <LeftEye css={props} />}</EyeWink>
+export const AnimatedLeftEye = ({ isAnimated }: { isAnimated: boolean }) => (
+  <EyeWink>{props => <LeftEye css={isAnimated && props} />}</EyeWink>
 );
 
 export const Head = styled.div`
@@ -151,9 +151,9 @@ const tongueLoop = async next => {
 
 const AnimateTongue = Keyframes.Spring(tongueLoop);
 
-export const AnimatedTongue = () => (
+export const AnimatedTongue = ({ isAnimated }: { isAnimated: boolean }) => (
   <AnimateTongue config={{ duration: 150 }}>
-    {props => <Tongue css={props} />}
+    {props => <Tongue css={isAnimated && props} />}
   </AnimateTongue>
 );
 

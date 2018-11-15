@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "react-emotion";
 import { BodyColorsType } from "./types";
 import { Keyframes } from "react-spring";
+import { lighten, transparentize } from 'polished';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -27,13 +28,16 @@ export const Belly = styled.div`
 `;
 
 export const Spots = styled.div`
-  background-color: ${({ color }: { color: string }) => color};
+  background-color: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) => secondaryBaseCoat};
   position: absolute;
-  right: 20px;
-  top: 20px;
-  height: 10px;
-  width: 10px;
+  right: 24px;
+  top: -16px;
+  height: 36px;
+  width: 36px;
   border-radius: 50%;
+  box-shadow: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
+  `22px 23px 0 -6px ${transparentize(0.2, secondaryBaseCoat)},
+  -18px 30px 0 -10px ${transparentize(0.4, secondaryBaseCoat)}`};
 `;
 
 export const Leg = styled.div`
@@ -85,12 +89,14 @@ const TailWag = Keyframes.Spring({
 });
 
 export const WaggingTail = ({
-  excitementLevel
+  excitementLevel,
+  isAnimated,
 }: {
   excitementLevel: "low" | "high";
+  isAnimated: boolean;
 }) => (
   <TailWag state={`excitementLevel-${excitementLevel}`}>
-    {props => <Tail css={props} />}
+    {props => <Tail css={isAnimated && props} />}
   </TailWag>
 );
 
