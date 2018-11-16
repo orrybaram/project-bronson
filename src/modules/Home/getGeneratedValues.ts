@@ -6,11 +6,16 @@ import {
   tertiaryBaseCoat,
   getUnderCoat
 } from "./getColors";
-import { darken } from 'polished';
+import { darken } from "polished";
 import names from "./names";
 import craftedDogs from "./craftedDogs";
 import { MetaType, ValuesType } from "./Home.types";
-import { getRandomArrayValue, getRandomRange, getProbability, createHash } from '../../lib/utils';
+import {
+  getRandomArrayValue,
+  getRandomRange,
+  getProbability,
+  createHash
+} from "../../lib/utils";
 
 const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
 
@@ -25,15 +30,14 @@ const getSpotSize = () => {
 };
 
 const generateSpotStyles = (baseCoat: string) => {
-  const boxShadow = generateSpotBoxShadows(baseCoat)
+  const boxShadow = generateSpotBoxShadows(baseCoat);
 
   return {
     ...getSpotSize(),
     backgroundColor: darken(0.05, baseCoat),
-    boxShadow,
-  }
-
-}
+    boxShadow
+  };
+};
 
 const generateSpotBoxShadows = (baseCoat: string) => {
   const spotAmount = getRandomRange(3, 10);
@@ -46,14 +50,15 @@ const generateSpotBoxShadows = (baseCoat: string) => {
     const y = getRandomRange(-10, 40);
 
     return `${x}px ${y}px 0 ${spread}px ${color}`;
-  })
-  return boxShadows.join(',');
-}
+  });
+  return boxShadows.join(",");
+};
 
 const generateValues = () => {
-  const baseColor = getBaseColor()
+  const baseColor = getBaseColor();
   const name = names[getRandomArrayValue(names)];
-  const hasSpots = getProbability(4)
+  const hasSpots = getProbability(4);
+  const spotStyles = generateSpotStyles(baseColor.hex);
 
   return {
     baseCoat: baseColor.hex,
@@ -61,14 +66,14 @@ const generateValues = () => {
       backgroundColors[getRandomArrayValue(backgroundColors)].hex,
     underCoat: getUnderCoat(baseColor.color),
     hasSpots,
-    spotStyles: generateSpotStyles(baseColor.hex),
+    spotStyles,
     secondaryBaseCoat:
       secondaryBaseCoat[getRandomArrayValue(secondaryBaseCoat)].hex,
     tertiaryBaseCoat:
       tertiaryBaseCoat[getRandomArrayValue(tertiaryBaseCoat)].hex,
     name: names[getRandomArrayValue(names)],
     eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex,
-    isButtFirst: getProbability(4),
+    isButtFirst: getProbability(4)
   };
 };
 
