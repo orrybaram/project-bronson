@@ -2,14 +2,16 @@ export interface DogPropsType {
   underCoat: string;
   baseCoat: string;
   isButtFirst: boolean;
-  spotStyles: { [key: string]: string }
+  spotStyles: { [key: string]: string };
+  heightFactor: number;
 }
 
-export interface HeadColorsType {
+export interface HeadPropsType {
   underCoat: string;
   baseCoat: string;
   eyeColor: string;
   isButtFirst: boolean;
+  heightFactor: number;
 }
 
 export interface DataType extends DogPropsType {

@@ -114,6 +114,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
       eyeColor,
       isButtFirst,
       spotStyles
+      heightFactor,
     } = data;
 
     return (
@@ -127,6 +128,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
           baseCoat={baseCoat}
           underCoat={underCoat}
           isButtFirst={isButtFirst}
+          heightFactor={heightFactor}
         >
           <S.Tail
             initialPose="wagging"
@@ -160,6 +162,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
           onMouseDown={this.onHeadMouseDown}
           onMouseUp={this.onHeadMouseUp}
           isButtFirst={isButtFirst}
+          heightFactor={heightFactor}
         />
         <Transition>
           {this.state.barks.map((bark, i) => (

@@ -9,6 +9,7 @@ type PropsType = {
   isButtFirst: boolean;
   onMouseDown: () => void;
   onMouseUp: () => void;
+  heightFactor: number;
 };
 
 const Head = (props: PropsType) => {
@@ -20,6 +21,7 @@ const Head = (props: PropsType) => {
     eyeColor,
     isBlinking,
     isButtFirst,
+    heightFactor,
   } = props;
 
   return (
@@ -30,6 +32,7 @@ const Head = (props: PropsType) => {
       baseCoat={baseCoat}
       eyeColor={eyeColor}
       isButtFirst={isButtFirst}
+      heightFactor={heightFactor}
     >
       <S.LeftEar />
       <S.RightEar />

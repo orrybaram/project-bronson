@@ -73,16 +73,21 @@ const generateValues = () => {
       tertiaryBaseCoat[getRandomArrayValue(tertiaryBaseCoat)].hex,
     name: names[getRandomArrayValue(names)],
     eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex,
-    isButtFirst: getProbability(4)
+    isButtFirst: getProbability(4),
+    heightFactor: getRandomRange(1, 8),
   };
 };
 
 export default (): { data: ValuesType; meta: MetaType } => {
   const isCriticalHit = getProbability(20);
 
-  const values = isCriticalHit
-    ? craftedDogs[getRandomArrayValue(craftedDogs)]
-    : generateValues();
+  let values = generateValues()
+  if (isCriticalHit) {
+    values = {
+      ...values,
+      ...craftedDogs[getRandomArrayValue(craftedDogs)],
+    }
+  }
 
   const hash = createHash(values);
 

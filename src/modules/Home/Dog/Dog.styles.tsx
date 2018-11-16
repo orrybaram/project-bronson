@@ -2,8 +2,6 @@ import styled, { css } from "react-emotion";
 import { DogPropsType } from "./types";
 import posed from "react-pose";
 import colors from "../../../colors";
-import { darken } from "polished";
-import { getRandomRange } from "../../../lib/utils";
 
 let areSpotsGenerated = false;
 
@@ -197,6 +195,7 @@ export const Body = styled.div`
 
   ${Torso}, ${Tail} {
     background-color: ${({ baseCoat }: DogPropsType) => baseCoat};
+    top: ${({ heightFactor }: DogPropsType) => `${heightFactor}px`};
   }
 
   ${Leg1}, ${Leg2}, ${Leg3}, ${Leg4} {
