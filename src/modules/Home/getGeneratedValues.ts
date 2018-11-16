@@ -6,7 +6,7 @@ import {
   tertiaryBaseCoat,
   getUnderCoat
 } from "./getColors";
-import { names } from "./names";
+import names from "./names";
 import craftedDogs from "./craftedDogs";
 import { MetaType, ValuesType } from "./Home.types";
 
@@ -28,6 +28,7 @@ const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
 
 const generateValues = () => {
   const baseColor = getBaseColor()
+  const name = names[getRandomArrayValue(names)];
 
   return {
     baseCoat: baseColor.hex,

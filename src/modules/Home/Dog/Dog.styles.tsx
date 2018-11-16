@@ -2,7 +2,7 @@ import styled, { css } from "react-emotion";
 import { DogPropsType } from "./types";
 import posed from "react-pose";
 import colors from "../../../colors";
-import { transparentize } from "polished";
+import { darken } from "polished";
 
 export const Dog = styled.div`
   position: relative;
@@ -37,7 +37,7 @@ export const Butt = styled.div`
   transform: rotate(6deg);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     height: 36px;
     width: 27px;
@@ -47,7 +47,7 @@ export const Butt = styled.div`
     transform: rotate(-12deg);
   }
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     height: 6px;
     width: 6px;
@@ -59,18 +59,21 @@ export const Butt = styled.div`
   }
 `;
 
+const getSpotDarkness = () => (Math.random() / 10) + 0.02;
+const spotModifiers = [getSpotDarkness(), getSpotDarkness(), getSpotDarkness()]
+
 export const Spots = styled.div`
-  background-color: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
-    secondaryBaseCoat};
+  background-color: ${({ baseCoat }: { baseCoat: string }) =>
+    `${darken(spotModifiers[0], baseCoat)}`};
   position: absolute;
   right: 24px;
   top: -16px;
   height: 36px;
   width: 36px;
   border-radius: 50%;
-  box-shadow: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
-    `22px 23px 0 -6px ${transparentize(0.2, secondaryBaseCoat)},
-  -18px 30px 0 -10px ${transparentize(0.4, secondaryBaseCoat)}`};
+  box-shadow: ${({ baseCoat }: { baseCoat: string }) =>
+    `22px 23px 0 -6px ${darken(spotModifiers[1], baseCoat)},
+  -18px 30px 0 -10px ${darken(spotModifiers[2], baseCoat)}`};
 `;
 
 export const Leg = styled.div`
@@ -137,12 +140,12 @@ export const Leg4 = styled(Leg)`
 `;
 
 const AnimatedTorso = posed.div({
-  draggable: 'x',
+  draggable: "x",
   dragBounds: {
-    left: '-2%',
-    right: '2%',
+    left: "-2%",
+    right: "2%"
   }
-})
+});
 
 export const Torso = styled(AnimatedTorso)`
   overflow: hidden;
@@ -157,7 +160,7 @@ const AnimatedBark = posed.div({
     opacity: 1,
     y: 0,
     x: 0,
-    scale: 0.5,
+    scale: 0.5
   },
   enter: {
     opacity: 0,
@@ -165,10 +168,10 @@ const AnimatedBark = posed.div({
     y: -100,
     x: -50,
     transition: {
-      duration: 2000,
+      duration: 2000
     },
-    applyAtStart: { display: 'block' },
-    applyAtEnd: { display: 'none' }
+    applyAtStart: { display: "block" },
+    applyAtEnd: { display: "none" }
   }
 });
 
@@ -210,20 +213,22 @@ export const Body = styled.div`
     }
   }
 
-  ${({ isButtFirst }: DogPropsType) => isButtFirst && css`
-    ${Legs} {
-      transform: scaleX(-1);
-      right: -18px;
-      bottom: 1px;
-    }
-    ${Tail} {
-      z-index: 1;
-      right: 3px;
-      height: 12px;
-      width: 16px;
-    }
-    ${Torso} {
-      border-radius: 4px 30px 5px 30px;
-    }
-  `}
+  ${({ isButtFirst }: DogPropsType) =>
+    isButtFirst &&
+    css`
+      ${Legs} {
+        transform: scaleX(-1);
+        right: -18px;
+        bottom: 1px;
+      }
+      ${Tail} {
+        z-index: 1;
+        right: 3px;
+        height: 12px;
+        width: 16px;
+      }
+      ${Torso} {
+        border-radius: 4px 30px 5px 30px;
+      }
+    `}
 `;

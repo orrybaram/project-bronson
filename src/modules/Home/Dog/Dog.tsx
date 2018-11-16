@@ -130,7 +130,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
             <S.Leg4 />
           </S.Legs>
           <S.Torso>
-            {hasSpots && <S.Spots secondaryBaseCoat={secondaryBaseCoat} />}
+            {hasSpots && <S.Spots baseCoat={baseCoat} />}
 
             {!isButtFirst && <S.Belly />}
 
