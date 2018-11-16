@@ -110,26 +110,26 @@ export default class Dog extends React.Component<PropsType, StateType> {
       underCoat,
       baseCoat,
       hasSpots,
-      secondaryBaseCoat,
       eyeColor,
       isButtFirst,
-      spotStyles
-      heightFactor,
+      spotStyles,
+      heightModifier,
+      scaleModifier,
     } = data;
 
     return (
       <S.Dog
+        baseCoat={baseCoat}
+        heightModifier={heightModifier}
+        isButtFirst={isButtFirst}
         onMouseEnter={this.onDogMouseEnter}
         onMouseLeave={this.onDogMouseLeave}
+        scaleModifier={scaleModifier}
+        spotStyles={spotStyles}
+        underCoat={underCoat}
       >
         <S.Shadow />
-        <S.Body
-          spotStyles={spotStyles}
-          baseCoat={baseCoat}
-          underCoat={underCoat}
-          isButtFirst={isButtFirst}
-          heightFactor={heightFactor}
-        >
+        <S.Body>
           <S.Tail
             initialPose="wagging"
             pose={
@@ -156,13 +156,13 @@ export default class Dog extends React.Component<PropsType, StateType> {
         </S.Body>
         <Head
           baseCoat={baseCoat}
-          underCoat={underCoat}
           eyeColor={eyeColor}
+          heightModifier={heightModifier}
           isBlinking={this.state.isBlinking}
+          isButtFirst={isButtFirst}
           onMouseDown={this.onHeadMouseDown}
           onMouseUp={this.onHeadMouseUp}
-          isButtFirst={isButtFirst}
-          heightFactor={heightFactor}
+          underCoat={underCoat}
         />
         <Transition>
           {this.state.barks.map((bark, i) => (

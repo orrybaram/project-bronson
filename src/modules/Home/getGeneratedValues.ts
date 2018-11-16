@@ -74,12 +74,13 @@ const generateValues = () => {
     name: names[getRandomArrayValue(names)],
     eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex,
     isButtFirst: getProbability(4),
-    heightFactor: getRandomRange(1, 8),
+    heightModifier: getRandomRange(1, 8),
+    scaleModifier: 1,
   };
 };
 
 export default (): { data: ValuesType; meta: MetaType } => {
-  const isCriticalHit = getProbability(20);
+  const isCriticalHit = getProbability(1);
 
   let values = generateValues()
   if (isCriticalHit) {

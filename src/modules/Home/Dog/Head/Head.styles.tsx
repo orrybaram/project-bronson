@@ -25,7 +25,7 @@ export const RightEar = styled(Ear)`
 export const Nose = styled.div`
   position: absolute;
   border-radius: 50%;
-  background-color: ${colors.neutral[90]};
+  background-color: ${colors.neutral[100]};
   width: 15px;
   height: 10px;
   bottom: 1px;
@@ -62,7 +62,6 @@ export const Face = styled.div`
 const Eye = css`
   position: absolute;
   border-radius: 50%;
-  background-color: ${colors.neutral[90]};
   width: 12px;
   height: 12px;
   top: 30px;
@@ -74,7 +73,7 @@ const Eye = css`
     content: "";
     position: absolute;
     border-radius: 50%;
-    background-color: white;
+    background-color: ${colors.neutral[10]};
     width: 3px;
     height: 3px;
   }
@@ -179,11 +178,14 @@ export const Head = styled(AnimatedHead)`
   position: absolute;
   transform: scale(1.1);
   cursor: pointer;
-  top: ${({ heightFactor}: HeadPropsType) => `${heightFactor - 40}px`};
+  top: ${({ heightModifier}: HeadPropsType) => `${heightModifier - 40}px`};
   left: -9px;
 
   ${FaceWrapper} {
     background-color: ${({ underCoat }: HeadPropsType) => underCoat};
+    &::after {
+      background-color: ${({ underCoat }: HeadPropsType) => underCoat};
+    }
   }
 
   ${Face} {

@@ -1,13 +1,15 @@
 import styled, { css } from "react-emotion";
-import { DogPropsType } from "./types";
 import posed from "react-pose";
 import colors from "../../../colors";
 
-let areSpotsGenerated = false;
-
-export const Dog = styled.div`
-  position: relative;
-`;
+type DogStylePropsType = {
+  isButtFirst: boolean;
+  underCoat: string;
+  baseCoat: string;
+  spotStyles: { [key: string]: string };
+  heightModifier: number;
+  scaleModifier: number;
+}
 
 export const Shadow = styled.div`
   position: absolute;
@@ -181,38 +183,43 @@ export const Bark = styled(AnimatedBark)`
 export const Body = styled.div`
   position: relative;
   cursor: pointer;
+`;
 
+export const Dog = styled.div`
+  position: relative;
+  transform: ${({ scaleModifier }: { scaleModifier: number}) => `scale(${scaleModifier})`};
+  transform-origin: bottom;
 
   ${Belly}, ${Butt} {
-    background-color: ${({ underCoat }: DogPropsType) => underCoat};
+    background-color: ${({ underCoat }: DogStylePropsType) => underCoat};
   }
 
   ${Butt} {
     &::after {
-      background-color: ${({ underCoat }: DogPropsType) => underCoat};
+      background-color: ${({ underCoat }: DogStylePropsType) => underCoat};
     }
   }
 
   ${Torso}, ${Tail} {
-    background-color: ${({ baseCoat }: DogPropsType) => baseCoat};
-    top: ${({ heightFactor }: DogPropsType) => `${heightFactor}px`};
+    background-color: ${({ baseCoat }: DogStylePropsType) => baseCoat};
+    top: ${({ heightModifier }: DogStylePropsType) => `${heightModifier}px`};
   }
 
   ${Leg1}, ${Leg2}, ${Leg3}, ${Leg4} {
-    background-color: ${({ baseCoat }: DogPropsType) => baseCoat};
+    background-color: ${({ baseCoat }: DogStylePropsType) => baseCoat};
 
     &::after {
-      background-color: ${({ underCoat }: DogPropsType) => underCoat};
+      background-color: ${({ underCoat }: DogStylePropsType) => underCoat};
     }
   }
 
-  ${({ spotStyles }: DogPropsType) => spotStyles && css({
+  ${({ spotStyles }: DogStylePropsType) => spotStyles && css({
     [`${Spots}`]: {
       ...spotStyles,
     }
   })}
 
-  ${({ isButtFirst }: DogPropsType) =>
+  ${({ isButtFirst }: DogStylePropsType) =>
     isButtFirst &&
     css`
       ${Legs} {

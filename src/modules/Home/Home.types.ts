@@ -9,7 +9,8 @@ export type ValuesType = {
   tertiaryBaseCoat: string;
   underCoat: string;
   spotStyles: { [key: string]: string };
-  heightFactor: number;
+  heightModifier: number;
+  scaleModifier: number;
 };
 
 export type MetaType = {

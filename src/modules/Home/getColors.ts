@@ -34,7 +34,7 @@ const getBaseCoats = () => {
 };
 
 const getEyeColors = () => {
-  return getColorVariants(["neutral"], [90]);
+  return getColorVariants(["neutral"], [100]);
 };
 
 export const backgroundColors = getBackgroundColors();
