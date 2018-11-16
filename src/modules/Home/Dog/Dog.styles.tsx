@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "react-emotion";
 import { BodyColorsType } from "./types";
 import posed from "react-pose";
+import colors from "../../../colors";
 import { lighten, transparentize } from "polished";
 
 export const Wrapper = styled.div`
@@ -63,13 +64,13 @@ const waggingAnimation = (duration: number) => ({
     type: "keyframes",
     values: ["rotate(10deg)", "rotate(-10deg)", "rotate(10deg)"],
     loop: Infinity,
-    duration,
+    duration
   }
 });
 
 const WaggingTail = posed.div({
   waggingSlow: waggingAnimation(1000),
-  waggingFast: waggingAnimation(250),
+  waggingFast: waggingAnimation(250)
 });
 
 export const Tail = styled(WaggingTail)`
@@ -100,7 +101,15 @@ export const Leg4 = styled(Leg)`
   left: 100px;
 `;
 
-export const Torso = styled.div`
+const AnimatedTorso = posed.div({
+  draggable: 'x',
+  dragBounds: {
+    left: '-2%',
+    right: '2%',
+  }
+})
+
+export const Torso = styled(AnimatedTorso)`
   overflow: auto;
   border-radius: 4px 10px 5px 30px;
   height: 50px;
@@ -108,8 +117,40 @@ export const Torso = styled.div`
   position: relative;
 `;
 
+const AnimatedBark = posed.div({
+  exit: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    scale: 0.5,
+  },
+  enter: {
+    opacity: 0,
+    scale: 1,
+    y: -100,
+    x: -50,
+    transition: {
+      duration: 2000,
+    },
+    applyAtStart: { display: 'block' },
+    applyAtEnd: { display: 'none' }
+  }
+});
+
+export const Bark = styled(AnimatedBark)`
+  display: none;
+  position: absolute;
+  top: -8px;
+  border-radius: 15px;
+  left: -78px;
+  padding: 10px;
+  font-weight: bold;
+  background: ${colors.neutral[0]};
+`;
+
 export const Body = styled.div`
   position: relative;
+  cursor: pointer;
 
   ${Belly} {
     background-color: ${({ underCoat }: BodyColorsType) => underCoat};

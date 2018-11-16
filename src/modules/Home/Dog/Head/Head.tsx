@@ -5,21 +5,36 @@ type PropsType = {
   underCoat: string;
   baseCoat: string;
   eyeColor: string;
-  isBlinking: boolean,
+  isBlinking: boolean;
+  onMouseDown: () => void;
+  onMouseUp: () => void;
 };
 
 const Head = (props: PropsType) => {
-  const { underCoat, baseCoat, eyeColor, isBlinking } = props;
+  const {
+    onMouseDown,
+    onMouseUp,
+    underCoat,
+    baseCoat,
+    eyeColor,
+    isBlinking
+  } = props;
 
   return (
-    <S.Head underCoat={underCoat} baseCoat={baseCoat} eyeColor={eyeColor}>
+    <S.Head
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      underCoat={underCoat}
+      baseCoat={baseCoat}
+      eyeColor={eyeColor}
+    >
       <S.LeftEar />
       <S.RightEar />
       <S.FaceWrapper>
         <S.Tongue initialPose="panting" pose="panting" />
         <S.Face>
-          <S.LeftEye pose={isBlinking ? 'blink' : ''} />
-          <S.RightEye pose={isBlinking ? 'blink' : ''} />
+          <S.LeftEye pose={isBlinking ? "blink" : ""} />
+          <S.RightEye pose={isBlinking ? "blink" : ""} />
           <S.Nose />
         </S.Face>
       </S.FaceWrapper>

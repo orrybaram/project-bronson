@@ -3713,18 +3713,13 @@ react-emotion@^9.2.12:
     babel-plugin-emotion "^9.2.11"
     create-emotion-styled "^9.2.8"
 
-react-is@^16.5.1:
-  version "16.6.3"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
-
-react-pose@^3.1.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-3.4.0.tgz#4adc829b47bffecf43b2082bd8bc3b0ac77d6b66"
+react-pose@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.1.tgz#d26ef0894daddea37dbfeae05a01d4a54b33e6d6"
   dependencies:
     "@emotion/is-prop-valid" "^0.6.5"
     hey-listen "^1.0.5"
     popmotion-pose "^3.4.0"
-    react-is "^16.5.1"
     tslib "^1.9.1"
 
 "react@>= 16.4.0":

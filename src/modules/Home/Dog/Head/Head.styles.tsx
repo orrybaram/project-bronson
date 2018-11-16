@@ -137,6 +137,8 @@ export const Tongue = styled(AnimatedTongue)`
 const AnimatedHead = posed.div({
   hoverable: true,
   pressable: true,
+  draggable: true,
+  dragBounds: { left: '-5%', right: '5%', top: '-5%', bottom: '5%' },
   init: {
     scale: 1.1,
     rotate: '5deg',
@@ -156,6 +158,8 @@ const AnimatedHead = posed.div({
 
 export const Head = styled(AnimatedHead)`
   position: absolute;
+  transform: scale(1.1);
+  cursor: pointer;
   top: -40px;
   left: -9px;
 
