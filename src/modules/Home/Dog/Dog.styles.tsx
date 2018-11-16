@@ -62,45 +62,13 @@ export const Butt = styled.div`
   }
 `;
 
-const getSpotDarkness = () => Math.random() / 10 + 0.01;
 
-const getSpotSize = () => {
-  const size = getRandomRange(20, 30);
-  return {
-    width: `${size}px`,
-    height: `${size}px`
-  };
-};
-
-// TODO: move to generator
-export const generateSpotBoxShadows = (baseCoat) => {
-  if (areSpotsGenerated) return null;
-  const spotAmount = getRandomRange(3, 10);
-  const spots = Array(spotAmount).fill(null);
-
-  const boxShadows = spots.map(() => {
-    const color = darken(getSpotDarkness(), baseCoat);
-    const spread = getRandomRange(-8, -4);
-    const x = getRandomRange(-40, 40);
-    const y = getRandomRange(-10, 40);
-
-    return `${x}px ${y}px 0 ${spread}px ${color}`;
-  })
-  areSpotsGenerated = true;
-  return boxShadows.join(',');
-}
-
-export const Spots = styled.div(
-  { ...getSpotSize() },
-  ({ baseCoat, spotBoxShadows }: { baseCoat: string, spotBoxShadows: string }) => (css`
-    background-color: ${darken(0.05, baseCoat)};
-    position: absolute;
-    right: 24px;
-    top: -16px;
-    border-radius: 50%;
-    box-shadow: ${spotBoxShadows};
-  `)
-);
+export const Spots = styled.div`
+  position: absolute;
+  right: 24px;
+  top: -16px;
+  border-radius: 50%;
+`;
 
 export const Leg = styled.div`
   position: absolute;
@@ -238,6 +206,12 @@ export const Body = styled.div`
       background-color: ${({ underCoat }: DogPropsType) => underCoat};
     }
   }
+
+  ${({ spotStyles }: DogPropsType) => spotStyles && css({
+    [`${Spots}`]: {
+      ...spotStyles,
+    }
+  })}
 
   ${({ isButtFirst }: DogPropsType) =>
     isButtFirst &&

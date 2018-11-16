@@ -8,6 +8,7 @@ export type ValuesType = {
   secondaryBaseCoat: string;
   tertiaryBaseCoat: string;
   underCoat: string;
+  spotStyles: { [key: string]: string }
 };
 
 export type MetaType = {

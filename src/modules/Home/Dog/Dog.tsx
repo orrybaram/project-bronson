@@ -3,13 +3,13 @@ import { Transition } from "react-pose";
 import { PropsType } from "./types";
 import * as S from "./Dog.styles";
 import Head from "./Head";
-import { getRandomRange, delay } from '../../../lib/utils';
+import { getRandomRange, delay } from "../../../lib/utils";
 
 type StateType = {
   excitementLevel: "low" | "high";
   isBlinking: boolean;
   isBarking: boolean;
-  barks: {id: number, text: string}[];
+  barks: { id: number; text: string }[];
 };
 
 export default class Dog extends React.Component<PropsType, StateType> {
@@ -47,7 +47,10 @@ export default class Dog extends React.Component<PropsType, StateType> {
   setIsBarking = () => {
     this.setState(
       {
-        barks: [...this.state.barks, {text: "Woof!", id: new Date().getTime()}]
+        barks: [
+          ...this.state.barks,
+          { text: "Woof!", id: new Date().getTime() }
+        ]
       },
       () => {
         setTimeout(() => {
@@ -91,21 +94,27 @@ export default class Dog extends React.Component<PropsType, StateType> {
 
   onHeadMouseDown = () => {
     this.setState({
-      isBlinking: true,
-    })
-  }
+      isBlinking: true
+    });
+  };
 
   onHeadMouseUp = () => {
     this.setState({
-      isBlinking: false,
-    })
-  }
-
-  spotBoxShadows = S.generateSpotBoxShadows(this.props.data.baseCoat);
+      isBlinking: false
+    });
+  };
 
   render() {
     const { data } = this.props;
-    const { underCoat, baseCoat, hasSpots, secondaryBaseCoat, eyeColor, isButtFirst } = data;
+    const {
+      underCoat,
+      baseCoat,
+      hasSpots,
+      secondaryBaseCoat,
+      eyeColor,
+      isButtFirst,
+      spotStyles
+    } = data;
 
     return (
       <S.Dog
@@ -113,7 +122,12 @@ export default class Dog extends React.Component<PropsType, StateType> {
         onMouseLeave={this.onDogMouseLeave}
       >
         <S.Shadow />
-        <S.Body baseCoat={baseCoat} underCoat={underCoat} isButtFirst={isButtFirst}>
+        <S.Body
+          spotStyles={spotStyles}
+          baseCoat={baseCoat}
+          underCoat={underCoat}
+          isButtFirst={isButtFirst}
+        >
           <S.Tail
             initialPose="wagging"
             pose={
@@ -129,7 +143,9 @@ export default class Dog extends React.Component<PropsType, StateType> {
             <S.Leg4 />
           </S.Legs>
           <S.Torso>
-            {hasSpots && <S.Spots spotBoxShadows={this.spotBoxShadows} baseCoat={baseCoat} />}
+            {hasSpots && (
+              <S.Spots />
+            )}
 
             {!isButtFirst && <S.Belly />}
 
