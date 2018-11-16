@@ -1,8 +1,17 @@
 import * as React from "react";
 import styled, { css } from "react-emotion";
 import posed from "react-pose";
-import { HeadPropsType } from "../types";
 import colors from "../../../../colors";
+
+export interface HeadStylePropsType {
+  baseCoat: string;
+  eyeColor: string;
+  heightModifier: number;
+  isButtFirst: boolean;
+  underCoat: string;
+}
+
+
 
 const Ear = styled.div`
   position: absolute;
@@ -178,32 +187,32 @@ export const Head = styled(AnimatedHead)`
   position: absolute;
   transform: scale(1.1);
   cursor: pointer;
-  top: ${({ heightModifier}: HeadPropsType) => `${heightModifier - 40}px`};
+  top: ${({ heightModifier}: HeadStylePropsType) => `${heightModifier - 40}px`};
   left: -9px;
 
   ${FaceWrapper} {
-    background-color: ${({ underCoat }: HeadPropsType) => underCoat};
+    background-color: ${({ underCoat }: HeadStylePropsType) => underCoat};
     &::after {
-      background-color: ${({ underCoat }: HeadPropsType) => underCoat};
+      background-color: ${({ underCoat }: HeadStylePropsType) => underCoat};
     }
   }
 
   ${Face} {
-    background-color: ${({ underCoat }: HeadPropsType) => underCoat};
+    background-color: ${({ underCoat }: HeadStylePropsType) => underCoat};
     &::before,
     &::after {
-      background-color: ${({ baseCoat }: HeadPropsType) => baseCoat};
+      background-color: ${({ baseCoat }: HeadStylePropsType) => baseCoat};
     }
   }
 
   ${LeftEar}, ${RightEar} {
-    background-color: ${({ underCoat }: HeadPropsType) => underCoat};
-    box-shadow: ${({ baseCoat }: HeadPropsType) =>
+    background-color: ${({ underCoat }: HeadStylePropsType) => underCoat};
+    box-shadow: ${({ baseCoat }: HeadStylePropsType) =>
       `inset 0px 4px 0 7px ${baseCoat}`};
   }
 
   ${LeftEye}, ${RightEye} {
-    background-color: ${({ eyeColor }: HeadPropsType) => eyeColor};
+    background-color: ${({ eyeColor }: HeadStylePropsType) => eyeColor};
   }
 
   ${({ isButtFirst }: {isButtFirst: boolean}) =>

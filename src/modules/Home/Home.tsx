@@ -19,6 +19,7 @@ const Main = styled.div`
 const Name = styled.h4`
   margin-top: 40px;
   opacity: 0.3;
+  font-size: 16px;
 `;
 
 type PropsType = {};
@@ -61,6 +62,11 @@ export default class Home extends React.Component<PropsType, StateType> {
     };
   }
 
+  componentDidMount() {
+    let viewedDogsCount = Number(localStorage.getItem('viewedDogsCount')) || 0;
+    localStorage.setItem('viewedDogsCount', `${viewedDogsCount += 1}`)
+  }
+
   saveDog = (hash: string, name: string) => () => {
     const dogs = getDogsFromLocalStorage();
     dogs[hash] = name;
@@ -100,7 +106,7 @@ export default class Home extends React.Component<PropsType, StateType> {
 
     return (
       <Main backgroundColor={backgroundColor}>
-        <Dog data={{ ...dogData }} />
+        <Dog { ...dogData } />
         <Name>{name}</Name>
         {/* <button onClick={this.saveDog(meta.hash, name)}>⭐</button>
         <List

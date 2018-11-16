@@ -170,6 +170,10 @@ const AnimatedBark = posed.div({
   }
 });
 
+export const BarkText = styled.div`
+  font-weight: bold;
+`;
+
 export const Bark = styled(AnimatedBark)`
   display: none;
   position: absolute;
@@ -177,7 +181,6 @@ export const Bark = styled(AnimatedBark)`
   border-radius: 15px;
   left: -78px;
   padding: 10px;
-  font-weight: bold;
   background: ${colors.neutral[0]};
 `;
 
@@ -193,6 +196,10 @@ export const Dog = styled.div`
 
   ${({ isFlipped }: DogStylePropsType) => isFlipped && css`
     transform: scaleX(-1);
+
+    ${BarkText} {
+      transform: scaleX(-1);
+    }
   `}
 
   ${Belly}, ${Butt} {

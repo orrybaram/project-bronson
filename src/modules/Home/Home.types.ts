@@ -4,6 +4,7 @@ export type ValuesType = {
   eyeColor: string;
   hasSpots: boolean;
   heightModifier: number;
+  isBarking: boolean;
   isButtFirst: boolean;
   isFlipped: boolean;
   name: string;

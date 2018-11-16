@@ -6,7 +6,7 @@ import {
   tertiaryBaseCoat,
   getUnderCoat
 } from "./getColors";
-import { darken } from "polished";
+import { darken, desaturate } from "polished";
 import names from "./names";
 import craftedDogs from "./craftedDogs";
 import { MetaType, ValuesType } from "./Home.types";
@@ -21,9 +21,10 @@ const CRITICAL_HIT_PROBABILITY = 20;
 const HAS_SPOTS_PROBABILITY = 4;
 const IS_BUTT_FIRST_PROBABILITY = 4;
 const IS_FLIPPED_PROBABILITY = 2;
+const IS_BARKING_PROBABILITY = 10;
 
 const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
-const getBaseColorDarkness = () => Math.random() / 10 + 0.01;
+const getBaseColorDesaturation = () => Math.random() / 10;
 const getSpotDarkness = () => Math.random() / 10 + 0.01;
 
 const getSpotSize = () => {
@@ -66,7 +67,7 @@ const generateValues = () => {
   const spotStyles = generateSpotStyles(baseColor.hex);
 
   return {
-    baseCoat: darken(getBaseColorDarkness(), baseColor.hex),
+    baseCoat: desaturate(getBaseColorDesaturation(), baseColor.hex),
     backgroundColor:
       backgroundColors[getRandomArrayValue(backgroundColors)].hex,
     underCoat: getUnderCoat(baseColor.color),
@@ -82,6 +83,7 @@ const generateValues = () => {
     heightModifier: getRandomRange(1, 8),
     scaleModifier: 1,
     isFlipped: getProbability(IS_FLIPPED_PROBABILITY),
+    isBarking: getProbability(IS_BARKING_PROBABILITY),
   };
 };
 

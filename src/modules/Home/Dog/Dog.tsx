@@ -1,9 +1,21 @@
 import * as React from "react";
 import { Transition } from "react-pose";
-import { PropsType } from "./types";
 import * as S from "./Dog.styles";
 import Head from "./Head";
 import { getRandomRange, delay } from "../../../lib/utils";
+
+export type PropsType = {
+  baseCoat: string;
+  eyeColor: string,
+  hasSpots: boolean;
+  heightModifier: number;
+  isBarking: boolean;
+  isButtFirst: boolean;
+  isFlipped: boolean;
+  scaleModifier: number;
+  spotStyles: { [key: string]: string };
+  underCoat: string;
+};
 
 type StateType = {
   excitementLevel: "low" | "high";
@@ -26,8 +38,10 @@ export default class Dog extends React.Component<PropsType, StateType> {
 
   componentDidMount() {
     this.startBlinking();
-    // TODO: add this at some point
-    // this.startBarking();
+
+    if (this.props.isBarking) {
+      this.startBarking();
+    }
   }
 
   startBlinking = async () => {
@@ -105,7 +119,6 @@ export default class Dog extends React.Component<PropsType, StateType> {
   };
 
   render() {
-    const { data } = this.props;
     const {
       underCoat,
       baseCoat,
@@ -116,7 +129,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
       heightModifier,
       scaleModifier,
       isFlipped,
-    } = data;
+    } = this.props;
 
     return (
       <S.Dog
@@ -168,7 +181,9 @@ export default class Dog extends React.Component<PropsType, StateType> {
         />
         <Transition>
           {this.state.barks.map((bark, i) => (
-            <S.Bark key={bark.id}>{bark.text}</S.Bark>
+            <S.Bark key={bark.id}>
+              <S.BarkText>{bark.text}</S.BarkText>
+            </S.Bark>
           ))}
         </Transition>
       </S.Dog>
