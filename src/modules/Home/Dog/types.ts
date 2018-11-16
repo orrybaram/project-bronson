@@ -1,6 +1,7 @@
-export interface BodyColorsType {
+export interface DogPropsType {
   underCoat: string;
   baseCoat: string;
+  isButtFirst: boolean;
 }
 
 export interface HeadColorsType {
@@ -9,11 +10,12 @@ export interface HeadColorsType {
   eyeColor: string;
 }
 
-export interface DataType extends BodyColorsType {
+export interface DataType extends DogPropsType {
   hasSpots: boolean;
   secondaryBaseCoat: string;
   tertiaryBaseCoat: string;
   eyeColor: string,
+  isButtFirst: boolean;
 }
 
 export type PropsType = {

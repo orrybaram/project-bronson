@@ -40,7 +40,8 @@ const generateValues = () => {
     tertiaryBaseCoat:
       tertiaryBaseCoat[getRandomArrayValue(tertiaryBaseCoat)].hex,
     name: names[getRandomArrayValue(names)],
-    eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex
+    eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex,
+    isButtFirst: getProbability(4),
   };
 };
 

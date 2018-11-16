@@ -106,15 +106,15 @@ export default class Dog extends React.Component<PropsType, StateType> {
 
   render() {
     const { data } = this.props;
-    const { underCoat, baseCoat, hasSpots, secondaryBaseCoat, eyeColor } = data;
+    const { underCoat, baseCoat, hasSpots, secondaryBaseCoat, eyeColor, isButtFirst } = data;
 
     return (
-      <S.Wrapper
+      <S.Dog
         onMouseEnter={this.onDogMouseEnter}
         onMouseLeave={this.onDogMouseLeave}
       >
         <S.Shadow />
-        <S.Body baseCoat={baseCoat} underCoat={underCoat}>
+        <S.Body baseCoat={baseCoat} underCoat={underCoat} isButtFirst={isButtFirst}>
           <S.Tail
             initialPose="wagging"
             pose={
@@ -123,13 +123,18 @@ export default class Dog extends React.Component<PropsType, StateType> {
                 : "waggingFast"
             }
           />
-          <S.Leg1 />
-          <S.Leg2 />
-          <S.Leg3 />
-          <S.Leg4 />
+          <S.Legs>
+            <S.Leg1 />
+            <S.Leg2 />
+            <S.Leg3 />
+            <S.Leg4 />
+          </S.Legs>
           <S.Torso>
-            <S.Belly color={underCoat} />
             {hasSpots && <S.Spots secondaryBaseCoat={secondaryBaseCoat} />}
+
+            {!isButtFirst && <S.Belly />}
+
+            {isButtFirst && <S.Butt />}
           </S.Torso>
         </S.Body>
         <Head
@@ -145,7 +150,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
             <S.Bark key={bark.id}>{bark.text}</S.Bark>
           ))}
         </Transition>
-      </S.Wrapper>
+      </S.Dog>
     );
   }
 }

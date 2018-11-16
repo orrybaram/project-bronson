@@ -1,12 +1,13 @@
 export type ValuesType = {
   backgroundColor: string;
-  underCoat: string;
   baseCoat: string;
+  eyeColor: string;
   hasSpots: boolean;
+  isButtFirst: boolean;
+  name: string;
   secondaryBaseCoat: string;
   tertiaryBaseCoat: string;
-  name: string;
-  eyeColor: string;
+  underCoat: string;
 };
 
 export type MetaType = {

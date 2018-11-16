@@ -1,11 +1,10 @@
-import * as React from "react";
-import styled from "react-emotion";
-import { BodyColorsType } from "./types";
+import styled, { css } from "react-emotion";
+import { DogPropsType } from "./types";
 import posed from "react-pose";
 import colors from "../../../colors";
-import { lighten, transparentize } from "polished";
+import { transparentize } from "polished";
 
-export const Wrapper = styled.div`
+export const Dog = styled.div`
   position: relative;
 `;
 
@@ -28,6 +27,38 @@ export const Belly = styled.div`
   border-radius: 10px 28px 24px 40px;
 `;
 
+export const Butt = styled.div`
+  position: absolute;
+  bottom: 5px;
+  height: 36px;
+  width: 27px;
+  right: 15px;
+  border-radius: 57px 26px 39px 25px;
+  transform: rotate(6deg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 36px;
+    width: 27px;
+    right: -26px;
+    border-radius: 26px 57px 25px 39px;
+    top: -3px;
+    transform: rotate(-12deg);
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    right: -1px;
+    border-radius: 50%;
+    top: 1px;
+    z-index: 1;
+    background-color: ${colors.red[10]};
+  }
+`;
+
 export const Spots = styled.div`
   background-color: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
     secondaryBaseCoat};
@@ -44,7 +75,6 @@ export const Spots = styled.div`
 
 export const Leg = styled.div`
   position: absolute;
-  bottom: -10px;
   height: 10px;
   width: 18px;
 
@@ -83,6 +113,11 @@ export const Tail = styled(WaggingTail)`
   transform-origin: center left;
 `;
 
+export const Legs = styled.div`
+  position: absolute;
+  bottom: 0px;
+`;
+
 export const Leg1 = styled(Leg)`
   left: 20px;
   bottom: -9px;
@@ -110,7 +145,7 @@ const AnimatedTorso = posed.div({
 })
 
 export const Torso = styled(AnimatedTorso)`
-  overflow: auto;
+  overflow: hidden;
   border-radius: 4px 10px 5px 30px;
   height: 50px;
   width: 120px;
@@ -152,19 +187,43 @@ export const Body = styled.div`
   position: relative;
   cursor: pointer;
 
-  ${Belly} {
-    background-color: ${({ underCoat }: BodyColorsType) => underCoat};
+
+  ${Belly}, ${Butt} {
+    background-color: ${({ underCoat }: DogPropsType) => underCoat};
+  }
+
+  ${Butt} {
+    &::after {
+      background-color: ${({ underCoat }: DogPropsType) => underCoat};
+    }
   }
 
   ${Torso}, ${Tail} {
-    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
+    background-color: ${({ baseCoat }: DogPropsType) => baseCoat};
   }
 
   ${Leg1}, ${Leg2}, ${Leg3}, ${Leg4} {
-    background-color: ${({ baseCoat }: BodyColorsType) => baseCoat};
+    background-color: ${({ baseCoat }: DogPropsType) => baseCoat};
 
     &::after {
-      background-color: ${({ underCoat }: BodyColorsType) => underCoat};
+      background-color: ${({ underCoat }: DogPropsType) => underCoat};
     }
   }
+
+  ${({ isButtFirst }: DogPropsType) => isButtFirst && css`
+    ${Legs} {
+      transform: scaleX(-1);
+      right: -18px;
+      bottom: 1px;
+    }
+    ${Tail} {
+      z-index: 1;
+      right: 3px;
+      height: 12px;
+      width: 16px;
+    }
+    ${Torso} {
+      border-radius: 4px 30px 5px 30px;
+    }
+  `}
 `;

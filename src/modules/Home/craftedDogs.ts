@@ -10,5 +10,6 @@ export default [
     secondaryBaseCoat: colors.neutral[20],
     tertiaryBaseCoat: colors.neutral[20],
     underCoat: colors.neutral[10],
+    isButtFirst: false,
   }
 ];
