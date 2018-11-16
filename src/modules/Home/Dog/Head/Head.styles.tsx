@@ -28,7 +28,7 @@ export const Nose = styled.div`
   background-color: ${colors.neutral[90]};
   width: 15px;
   height: 10px;
-  bottom: 3px;
+  bottom: 1px;
   left: 17px;
   z-index: 1;
 `;
@@ -108,6 +108,18 @@ export const FaceWrapper = styled.div`
   height: 60px;
   width: 60px;
   border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
+  z-index: 3;
+
+  &::after  {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 10px;
+    bottom: -2px;
+    width: 18px;
+    height: 14px;
+    left: 18px;
+  }
 `;
 
 const AnimatedTongue = posed.div({
@@ -141,17 +153,17 @@ const AnimatedHead = posed.div({
   dragBounds: { left: '-5%', right: '5%', top: '-5%', bottom: '5%' },
   init: {
     scale: 1.1,
-    rotate: '5deg',
+    rotate: ({isButtFirst}) => isButtFirst ? '30deg' : '5deg',
     translateY: '0px',
   },
   hover: {
-    rotate: '10deg',
+    rotate: ({isButtFirst}) => isButtFirst ? '35deg' : '10deg',
     scale: 1.1,
     translateY: '0px',
   },
   press: {
     scale: 1.1,
-    rotate: '12deg',
+    rotate: ({isButtFirst}) => isButtFirst ? '37deg' : '12deg',
     translateY: '5px',
   }
 });
@@ -184,4 +196,11 @@ export const Head = styled(AnimatedHead)`
   ${LeftEye}, ${RightEye} {
     background-color: ${({ eyeColor }: HeadColorsType) => eyeColor};
   }
+
+  ${({ isButtFirst }) => isButtFirst && css`
+    transform: rotate(30deg) scale(1.1);
+    top: -35px;
+    left: -15px;
+    box-shadow: 20px -4px 20px -15px #00000021;
+  `}
 `;

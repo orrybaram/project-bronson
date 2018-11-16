@@ -6,6 +6,7 @@ type PropsType = {
   baseCoat: string;
   eyeColor: string;
   isBlinking: boolean;
+  isButtFirst: boolean;
   onMouseDown: () => void;
   onMouseUp: () => void;
 };
@@ -17,7 +18,8 @@ const Head = (props: PropsType) => {
     underCoat,
     baseCoat,
     eyeColor,
-    isBlinking
+    isBlinking,
+    isButtFirst,
   } = props;
 
   return (
@@ -27,6 +29,7 @@ const Head = (props: PropsType) => {
       underCoat={underCoat}
       baseCoat={baseCoat}
       eyeColor={eyeColor}
+      isButtFirst={isButtFirst}
     >
       <S.LeftEar />
       <S.RightEar />

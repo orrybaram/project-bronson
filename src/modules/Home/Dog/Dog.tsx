@@ -144,6 +144,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
           isBlinking={this.state.isBlinking}
           onMouseDown={this.onHeadMouseDown}
           onMouseUp={this.onHeadMouseUp}
+          isButtFirst={isButtFirst}
         />
         <Transition>
           {this.state.barks.map((bark, i) => (
