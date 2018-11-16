@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "react-emotion";
 import { BodyColorsType } from "./types";
-import { Keyframes } from "react-spring";
-import { lighten, transparentize } from 'polished';
+import posed from "react-pose";
+import { lighten, transparentize } from "polished";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -28,7 +28,8 @@ export const Belly = styled.div`
 `;
 
 export const Spots = styled.div`
-  background-color: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) => secondaryBaseCoat};
+  background-color: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
+    secondaryBaseCoat};
   position: absolute;
   right: 24px;
   top: -16px;
@@ -36,7 +37,7 @@ export const Spots = styled.div`
   width: 36px;
   border-radius: 50%;
   box-shadow: ${({ secondaryBaseCoat }: { secondaryBaseCoat: string }) =>
-  `22px 23px 0 -6px ${transparentize(0.2, secondaryBaseCoat)},
+    `22px 23px 0 -6px ${transparentize(0.2, secondaryBaseCoat)},
   -18px 30px 0 -10px ${transparentize(0.4, secondaryBaseCoat)}`};
 `;
 
@@ -56,7 +57,22 @@ export const Leg = styled.div`
   }
 `;
 
-export const Tail = styled.div`
+const waggingAnimation = (duration: number) => ({
+  transform: "rotate(0deg)",
+  transition: {
+    type: "keyframes",
+    values: ["rotate(10deg)", "rotate(-10deg)", "rotate(10deg)"],
+    loop: Infinity,
+    duration,
+  }
+});
+
+const WaggingTail = posed.div({
+  waggingSlow: waggingAnimation(1000),
+  waggingFast: waggingAnimation(250),
+});
+
+export const Tail = styled(WaggingTail)`
   position: absolute;
   right: -5px;
   height: 10px;
@@ -65,40 +81,6 @@ export const Tail = styled.div`
   top: 1px;
   transform-origin: center left;
 `;
-
-const tailWagLoop = (duration: number) => async next => {
-  while (true) {
-    await next({
-      transform: "rotate(10deg)",
-      from: { transform: "rotate(-10deg)" },
-      reset: false,
-      config: { duration }
-    });
-    await next({
-      transform: "rotate(-10deg)",
-      from: { transform: "rotate(10deg)" },
-      reset: true,
-      config: { duration }
-    });
-  }
-});
-
-const TailWag = Keyframes.Spring({
-  "excitementLevel-low": tailWagLoop(1500),
-  "excitementLevel-high": tailWagLoop(200)
-});
-
-export const WaggingTail = ({
-  excitementLevel,
-  isAnimated,
-}: {
-  excitementLevel: "low" | "high";
-  isAnimated: boolean;
-}) => (
-  <TailWag state={`excitementLevel-${excitementLevel}`}>
-    {props => <Tail css={isAnimated && props} />}
-  </TailWag>
-);
 
 export const Leg1 = styled(Leg)`
   left: 20px;

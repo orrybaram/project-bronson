@@ -5,21 +5,21 @@ type PropsType = {
   underCoat: string;
   baseCoat: string;
   eyeColor: string;
-  isAnimated: boolean,
+  isBlinking: boolean,
 };
 
 const Head = (props: PropsType) => {
-  const { underCoat, baseCoat, eyeColor, isAnimated } = props;
+  const { underCoat, baseCoat, eyeColor, isBlinking } = props;
 
   return (
     <S.Wrapper underCoat={underCoat} baseCoat={baseCoat} eyeColor={eyeColor}>
       <S.LeftEar />
       <S.RightEar />
       <S.Head>
-        <S.AnimatedTongue isAnimated={isAnimated} />
+        <S.Tongue initialPose="panting" pose="panting" />
         <S.Face>
-          <S.AnimatedLeftEye isAnimated={isAnimated} />
-          <S.RightEye />
+          <S.LeftEye pose={isBlinking ? 'blink' : ''} />
+          <S.RightEye pose={isBlinking ? 'blink' : ''} />
           <S.Nose />
         </S.Face>
       </S.Head>

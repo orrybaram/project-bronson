@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "react-emotion";
-import { debounce } from 'lodash';
 import getGeneratedValues from "./getGeneratedValues";
 import Dog from "./Dog";
 import { ValuesType, MetaType } from "./Home.types";
@@ -29,7 +28,7 @@ type StateType = {
     data: ValuesType;
     meta: MetaType;
     excitementLevel: "low" | "high";
-    isAnimated: boolean,
+    isBlinking: boolean;
   };
   starredDogs: { hash: string; name: string }[];
 };
@@ -56,7 +55,7 @@ export default class Home extends React.Component<PropsType, StateType> {
         data,
         meta,
         excitementLevel: "low",
-        isAnimated: true,
+        isBlinking: false
       },
       starredDogs
     };
@@ -80,7 +79,7 @@ export default class Home extends React.Component<PropsType, StateType> {
       dog: {
         ...this.state.dog,
         data: values,
-        meta: { hash },
+        meta: { hash }
       }
     });
   };
@@ -94,39 +93,14 @@ export default class Home extends React.Component<PropsType, StateType> {
     });
   };
 
-  onDogClick = () => {
-    this.setState({
-      dog: {
-        ...this.state.dog,
-        excitementLevel: "high"
-      }
-    });
-
-    setTimeout(() => {
-      this.setState({
-        dog: {
-          ...this.state.dog,
-          excitementLevel: "low"
-        }
-      });
-    }, 5000);
-  };
-
-  debouncedOnDogClick = debounce(this.onDogClick, 500, {leading: true});
-
   render() {
     const { dog, starredDogs } = this.state;
-    const { data, meta, isAnimated, excitementLevel } = dog;
+    const { data, meta, isBlinking, excitementLevel } = dog;
     const { backgroundColor, name, ...dogData } = data;
 
     return (
       <Main backgroundColor={backgroundColor}>
-        <Dog
-          data={{ ...dogData }}
-          excitementLevel={excitementLevel}
-          onClick={this.debouncedOnDogClick}
-          isAnimated={isAnimated}
-        />
+        <Dog data={{ ...dogData }} />
         <Name>{name}</Name>
         {/* <button onClick={this.saveDog(meta.hash, name)}>⭐</button>
         <List

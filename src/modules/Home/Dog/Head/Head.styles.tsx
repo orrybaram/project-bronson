@@ -1,12 +1,8 @@
 import * as React from "react";
-import styled from "react-emotion";
-import { Keyframes } from "react-spring";
+import styled, { css } from "react-emotion";
+import posed from "react-pose";
 import { HeadColorsType } from "../types";
 import colors from "../../../../colors";
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-const getRandomRange = (min: number, max: number) =>
-  Math.random() * (max - min) + min;
 
 const Ear = styled.div`
   position: absolute;
@@ -14,16 +10,6 @@ const Ear = styled.div`
   width: 35px;
   height: 50px;
   top: -15px;
-`;
-
-export const Tongue = styled.div`
-  position: absolute;
-  border-radius: 0 0 10px 10px;
-  background-color: ${colors.red[20]};
-  width: 12px;
-  height: 20px;
-  top: 40px;
-  left: 22px;
 `;
 
 export const LeftEar = styled(Ear)`
@@ -73,7 +59,7 @@ export const RightEar = styled(Ear)`
   transform: rotate(50deg);
 `;
 
-const Eye = styled.div`
+const Eye = css`
   position: absolute;
   border-radius: 50%;
   background-color: ${colors.neutral[90]};
@@ -94,38 +80,28 @@ const Eye = styled.div`
   }
 `;
 
-export const LeftEye = styled(Eye)`
+const AnimatedEye = posed.div({
+  blink: {
+    transform: 'matrix(1, 0, 0, 1, 0, 0)',
+    transition: () => {
+      return {
+        type: 'keyframes',
+        values: ['matrix(1, 0, 0, 1, 0, 0)', 'matrix(1, 0, 0, 0.1, 0, 0)', 'matrix(1, 0, 0, 1, 0, 0)'],
+        duration: 200,
+      }
+    }
+  }
+});
+
+export const LeftEye = styled(AnimatedEye)`
+  ${Eye}
   left: 10px;
 `;
 
-export const RightEye = styled(Eye)`
+export const RightEye = styled(AnimatedEye)`
+  ${Eye}
   right: 14px;
 `;
-
-const eyeWinkLoop = async next => {
-  while (true) {
-    const winkInterval = getRandomRange(1000, 10000)
-    await next({ opacity: 1});
-    await delay(winkInterval);
-
-    await next({
-      transform: "matrix(1, 0, 0, 0.1, 0, 0);",
-      from: { transform: "matrix(1, 0, 0, 1, 0, 0);" },
-      config: { duration: 100 }
-    });
-    await next({
-      transform: "matrix(1, 0, 0, 1, 0, 0);",
-      from: { transform: "matrix(1, 0, 0, 0.1, 0, 0);" },
-      config: { duration: 100 }
-    });
-  }
-};
-
-const EyeWink = Keyframes.Spring(eyeWinkLoop);
-
-export const AnimatedLeftEye = ({ isAnimated }: { isAnimated: boolean }) => (
-  <EyeWink>{props => <LeftEye css={isAnimated && props} />}</EyeWink>
-);
 
 export const Head = styled.div`
   position: relative;
@@ -134,28 +110,29 @@ export const Head = styled.div`
   border-radius: 45px 66px 32px 18px / 60px 52px 17px 32px;
 `;
 
-const tongueLoop = async next => {
-  while (true) {
-    await next({
-      transform: "translateY(10px)",
-      from: { transform: "translateY(8px)" },
-      reset: false
-    });
-    await next({
-      transform: "translateY(8px)",
-      from: { transform: "translateY(10px)" },
-      reset: true
-    });
+const AnimatedTongue = posed.div({
+  panting: {
+    transform: "translateY(10px)",
+    transition: () => {
+      return {
+        type: 'keyframes',
+        values: ['translateY(10px)', 'translateY(8px)', 'translateY(10px)'],
+        loop: Infinity,
+        duration: 500,
+      }
+    }
   }
-};
+})
 
-const AnimateTongue = Keyframes.Spring(tongueLoop);
-
-export const AnimatedTongue = ({ isAnimated }: { isAnimated: boolean }) => (
-  <AnimateTongue config={{ duration: 150 }}>
-    {props => <Tongue css={isAnimated && props} />}
-  </AnimateTongue>
-);
+export const Tongue = styled(AnimatedTongue)`
+  position: absolute;
+  border-radius: 0 0 10px 10px;
+  background-color: ${colors.red[20]};
+  width: 12px;
+  height: 20px;
+  top: 40px;
+  left: 22px;
+`;
 
 export const Wrapper = styled.div`
   position: absolute;
