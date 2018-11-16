@@ -18,7 +18,7 @@ const getColorVariants = (colorArray: string[], levels: number[]) => {
 const getBackgroundColors = () => {
   return getColorVariants(
     ["red", "orange", "yellow", "green", "blue", "purple"],
-    [20]
+    [10, 20]
   );
 };
 
@@ -29,7 +29,7 @@ export const getUnderCoat = (baseColor: string) => {
 const getBaseCoats = () => {
   return getColorVariants(
     ["orange", "yellow", "neutral"],
-    [40, 50, 60, 70, 80]
+    [40, 50, 60]
   );
 };
 

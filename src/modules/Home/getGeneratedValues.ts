@@ -17,8 +17,13 @@ import {
   createHash
 } from "../../lib/utils";
 
-const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
+const CRITICAL_HIT_PROBABILITY = 20;
+const HAS_SPOTS_PROBABILITY = 4;
+const IS_BUTT_FIRST_PROBABILITY = 4;
+const IS_FLIPPED_PROBABILITY = 2;
 
+const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
+const getBaseColorDarkness = () => Math.random() / 10 + 0.01;
 const getSpotDarkness = () => Math.random() / 10 + 0.01;
 
 const getSpotSize = () => {
@@ -57,11 +62,11 @@ const generateSpotBoxShadows = (baseCoat: string) => {
 const generateValues = () => {
   const baseColor = getBaseColor();
   const name = names[getRandomArrayValue(names)];
-  const hasSpots = getProbability(4);
+  const hasSpots = getProbability(HAS_SPOTS_PROBABILITY);
   const spotStyles = generateSpotStyles(baseColor.hex);
 
   return {
-    baseCoat: baseColor.hex,
+    baseCoat: darken(getBaseColorDarkness(), baseColor.hex),
     backgroundColor:
       backgroundColors[getRandomArrayValue(backgroundColors)].hex,
     underCoat: getUnderCoat(baseColor.color),
@@ -73,14 +78,15 @@ const generateValues = () => {
       tertiaryBaseCoat[getRandomArrayValue(tertiaryBaseCoat)].hex,
     name: names[getRandomArrayValue(names)],
     eyeColor: eyeColors[getRandomArrayValue(eyeColors)].hex,
-    isButtFirst: getProbability(4),
+    isButtFirst: getProbability(IS_BUTT_FIRST_PROBABILITY),
     heightModifier: getRandomRange(1, 8),
     scaleModifier: 1,
+    isFlipped: getProbability(IS_FLIPPED_PROBABILITY),
   };
 };
 
 export default (): { data: ValuesType; meta: MetaType } => {
-  const isCriticalHit = getProbability(1);
+  const isCriticalHit = getProbability(CRITICAL_HIT_PROBABILITY);
 
   let values = generateValues()
   if (isCriticalHit) {

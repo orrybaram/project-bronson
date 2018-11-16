@@ -37,6 +37,7 @@ export default [
   },
   {
     name: getTinyName(),
-    scaleModifier: 0.55
+    scaleModifier: 0.55,
+    isFlipped: false,
   }
 ];

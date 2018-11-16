@@ -3,12 +3,13 @@ import posed from "react-pose";
 import colors from "../../../colors";
 
 type DogStylePropsType = {
-  isButtFirst: boolean;
-  underCoat: string;
   baseCoat: string;
-  spotStyles: { [key: string]: string };
   heightModifier: number;
+  isButtFirst: boolean;
+  isFlipped: boolean;
   scaleModifier: number;
+  spotStyles: { [key: string]: string };
+  underCoat: string;
 }
 
 export const Shadow = styled.div`
@@ -189,6 +190,10 @@ export const Dog = styled.div`
   position: relative;
   transform: ${({ scaleModifier }: { scaleModifier: number}) => `scale(${scaleModifier})`};
   transform-origin: bottom;
+
+  ${({ isFlipped }: DogStylePropsType) => isFlipped && css`
+    transform: scaleX(-1);
+  `}
 
   ${Belly}, ${Butt} {
     background-color: ${({ underCoat }: DogStylePropsType) => underCoat};

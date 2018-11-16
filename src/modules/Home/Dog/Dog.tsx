@@ -115,6 +115,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
       spotStyles,
       heightModifier,
       scaleModifier,
+      isFlipped,
     } = data;
 
     return (
@@ -127,6 +128,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
         scaleModifier={scaleModifier}
         spotStyles={spotStyles}
         underCoat={underCoat}
+        isFlipped={isFlipped}
       >
         <S.Shadow />
         <S.Body>

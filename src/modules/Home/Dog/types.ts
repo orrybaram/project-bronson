@@ -15,6 +15,7 @@ export type DogPropsType = {
   spotStyles: { [key: string]: string };
   heightModifier: number;
   scaleModifier: number;
+  isFlipped: boolean;
 }
 
 export type PropsType = {
