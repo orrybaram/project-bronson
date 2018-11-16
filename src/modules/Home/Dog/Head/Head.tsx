@@ -12,18 +12,18 @@ const Head = (props: PropsType) => {
   const { underCoat, baseCoat, eyeColor, isBlinking } = props;
 
   return (
-    <S.Wrapper underCoat={underCoat} baseCoat={baseCoat} eyeColor={eyeColor}>
+    <S.Head underCoat={underCoat} baseCoat={baseCoat} eyeColor={eyeColor}>
       <S.LeftEar />
       <S.RightEar />
-      <S.Head>
+      <S.FaceWrapper>
         <S.Tongue initialPose="panting" pose="panting" />
         <S.Face>
           <S.LeftEye pose={isBlinking ? 'blink' : ''} />
           <S.RightEye pose={isBlinking ? 'blink' : ''} />
           <S.Nose />
         </S.Face>
-      </S.Head>
-    </S.Wrapper>
+      </S.FaceWrapper>
+    </S.Head>
   );
 };
 

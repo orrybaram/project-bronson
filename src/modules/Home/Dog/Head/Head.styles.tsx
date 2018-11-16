@@ -17,6 +17,11 @@ export const LeftEar = styled(Ear)`
   transform: rotate(-50deg);
 `;
 
+export const RightEar = styled(Ear)`
+  right: -20px;
+  transform: rotate(50deg);
+`;
+
 export const Nose = styled.div`
   position: absolute;
   border-radius: 50%;
@@ -52,11 +57,6 @@ export const Face = styled.div`
   &::after {
     right: -17px;
   }
-`;
-
-export const RightEar = styled(Ear)`
-  right: -20px;
-  transform: rotate(50deg);
 `;
 
 const Eye = css`
@@ -103,7 +103,7 @@ export const RightEye = styled(AnimatedEye)`
   right: 14px;
 `;
 
-export const Head = styled.div`
+export const FaceWrapper = styled.div`
   position: relative;
   height: 60px;
   width: 60px;
@@ -134,12 +134,32 @@ export const Tongue = styled(AnimatedTongue)`
   left: 22px;
 `;
 
-export const Wrapper = styled.div`
+const AnimatedHead = posed.div({
+  hoverable: true,
+  pressable: true,
+  init: {
+    scale: 1.1,
+    rotate: '5deg',
+    translateY: '0px',
+  },
+  hover: {
+    rotate: '10deg',
+    scale: 1.1,
+    translateY: '0px',
+  },
+  press: {
+    scale: 1.1,
+    rotate: '12deg',
+    translateY: '5px',
+  }
+});
+
+export const Head = styled(AnimatedHead)`
   position: absolute;
   top: -40px;
   left: -9px;
 
-  ${Head} {
+  ${FaceWrapper} {
     background-color: ${({ underCoat }: HeadColorsType) => underCoat};
   }
 
