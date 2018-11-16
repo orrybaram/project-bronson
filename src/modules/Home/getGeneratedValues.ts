@@ -9,20 +9,7 @@ import {
 import names from "./names";
 import craftedDogs from "./craftedDogs";
 import { MetaType, ValuesType } from "./Home.types";
-
-const createHash = (values: Object) => btoa(JSON.stringify(values));
-
-const getRandomNumber = (range: number) =>
-  Math.floor(Math.random() * range) + 1;
-
-const getRandomArrayValue = (array: Array<any>) => {
-  const randomIndex = getRandomNumber(array.length) - 1;
-  return randomIndex;
-};
-
-const getProbability = (consequent: number) => {
-  return getRandomNumber(consequent) === consequent;
-};
+import { getRandomArrayValue, getProbability, createHash } from '../../lib/utils';
 
 const getBaseColor = () => baseCoat[getRandomArrayValue(baseCoat)];
 
@@ -35,7 +22,7 @@ const generateValues = () => {
     backgroundColor:
       backgroundColors[getRandomArrayValue(backgroundColors)].hex,
     underCoat: getUnderCoat(baseColor.color),
-    hasSpots: getProbability(3),
+    hasSpots: getProbability(4),
     secondaryBaseCoat:
       secondaryBaseCoat[getRandomArrayValue(secondaryBaseCoat)].hex,
     tertiaryBaseCoat:

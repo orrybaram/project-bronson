@@ -3,6 +3,9 @@ import { DogPropsType } from "./types";
 import posed from "react-pose";
 import colors from "../../../colors";
 import { darken } from "polished";
+import { getRandomRange } from "../../../lib/utils";
+
+let areSpotsGenerated = false;
 
 export const Dog = styled.div`
   position: relative;
@@ -59,22 +62,45 @@ export const Butt = styled.div`
   }
 `;
 
-const getSpotDarkness = () => (Math.random() / 10) + 0.02;
-const spotModifiers = [getSpotDarkness(), getSpotDarkness(), getSpotDarkness()]
+const getSpotDarkness = () => Math.random() / 10 + 0.01;
 
-export const Spots = styled.div`
-  background-color: ${({ baseCoat }: { baseCoat: string }) =>
-    `${darken(spotModifiers[0], baseCoat)}`};
-  position: absolute;
-  right: 24px;
-  top: -16px;
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-  box-shadow: ${({ baseCoat }: { baseCoat: string }) =>
-    `22px 23px 0 -6px ${darken(spotModifiers[1], baseCoat)},
-  -18px 30px 0 -10px ${darken(spotModifiers[2], baseCoat)}`};
-`;
+const getSpotSize = () => {
+  const size = getRandomRange(20, 30);
+  return {
+    width: `${size}px`,
+    height: `${size}px`
+  };
+};
+
+// TODO: move to generator
+export const generateSpotBoxShadows = (baseCoat) => {
+  if (areSpotsGenerated) return null;
+  const spotAmount = getRandomRange(3, 10);
+  const spots = Array(spotAmount).fill(null);
+
+  const boxShadows = spots.map(() => {
+    const color = darken(getSpotDarkness(), baseCoat);
+    const spread = getRandomRange(-8, -4);
+    const x = getRandomRange(-40, 40);
+    const y = getRandomRange(-10, 40);
+
+    return `${x}px ${y}px 0 ${spread}px ${color}`;
+  })
+  areSpotsGenerated = true;
+  return boxShadows.join(',');
+}
+
+export const Spots = styled.div(
+  { ...getSpotSize() },
+  ({ baseCoat, spotBoxShadows }: { baseCoat: string, spotBoxShadows: string }) => (css`
+    background-color: ${darken(0.05, baseCoat)};
+    position: absolute;
+    right: 24px;
+    top: -16px;
+    border-radius: 50%;
+    box-shadow: ${spotBoxShadows};
+  `)
+);
 
 export const Leg = styled.div`
   position: absolute;

@@ -3,10 +3,7 @@ import { Transition } from "react-pose";
 import { PropsType } from "./types";
 import * as S from "./Dog.styles";
 import Head from "./Head";
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-const getRandomRange = (min: number, max: number) =>
-  Math.random() * (max - min) + min;
+import { getRandomRange, delay } from '../../../lib/utils';
 
 type StateType = {
   excitementLevel: "low" | "high";
@@ -104,6 +101,8 @@ export default class Dog extends React.Component<PropsType, StateType> {
     })
   }
 
+  spotBoxShadows = S.generateSpotBoxShadows(this.props.data.baseCoat);
+
   render() {
     const { data } = this.props;
     const { underCoat, baseCoat, hasSpots, secondaryBaseCoat, eyeColor, isButtFirst } = data;
@@ -130,7 +129,7 @@ export default class Dog extends React.Component<PropsType, StateType> {
             <S.Leg4 />
           </S.Legs>
           <S.Torso>
-            {hasSpots && <S.Spots baseCoat={baseCoat} />}
+            {hasSpots && <S.Spots spotBoxShadows={this.spotBoxShadows} baseCoat={baseCoat} />}
 
             {!isButtFirst && <S.Belly />}
 
