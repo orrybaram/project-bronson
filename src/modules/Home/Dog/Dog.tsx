@@ -2,7 +2,7 @@ import * as React from "react";
 import { Transition } from "react-pose";
 import * as S from "./Dog.styles";
 import Head from "./Head";
-import { getRandomRange, delay } from "../../../lib/utils";
+import { getRandomRange, delay } from "lib/utils";
 
 export type PropsType = {
   baseCoat: string;

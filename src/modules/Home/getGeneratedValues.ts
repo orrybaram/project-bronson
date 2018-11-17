@@ -15,7 +15,7 @@ import {
   getRandomRange,
   getProbability,
   createHash
-} from "../../lib/utils";
+} from "lib/utils";
 
 const CRITICAL_HIT_PROBABILITY = 20;
 const HAS_SPOTS_PROBABILITY = 4;

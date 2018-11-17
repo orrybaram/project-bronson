@@ -1,6 +1,6 @@
 import colors from "../../colors";
 import names from "./names";
-import { getRandomArrayValue } from "../../lib/utils";
+import { getRandomArrayValue } from "lib/utils";
 
 const getTinyName = () => {
   const littlePrefixes = ["Tiny", "Mini", "Lil'"];

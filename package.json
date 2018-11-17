@@ -20,11 +20,15 @@
     "@types/lodash": "^4.14.118",
     "@types/react-dom": "^16.0.9",
     "emotion": "^9.2.12",
+    "lib": "^3.0.2",
     "polished": "^2.3.0",
     "prop-types": "15.x.x",
     "react": ">= 16.4.0",
     "react-dom": ">= 16.4.0",
     "react-emotion": "^9.2.12",
     "react-pose": "^4.0.1"
+  },
+  "alias": {
+    "lib": "./src/lib"
   }
 }

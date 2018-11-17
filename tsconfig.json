@@ -5,6 +5,10 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "strict": true,
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "lib": ["src/lib"]
+    }
   }
 }
