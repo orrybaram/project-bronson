@@ -1,6 +1,8 @@
 import styled, { css } from "react-emotion";
 import posed from "react-pose";
-import colors from "../../../colors";
+import colors from "lib/colors";
+
+export const BARK_TRANSITION_TIME = 2000;
 
 type DogStylePropsType = {
   baseCoat: string;
@@ -163,7 +165,7 @@ const AnimatedBark = posed.div({
     y: -100,
     x: -50,
     transition: {
-      duration: 2000
+      duration: BARK_TRANSITION_TIME,
     },
     applyAtStart: { display: "block" },
     applyAtEnd: { display: "none" }

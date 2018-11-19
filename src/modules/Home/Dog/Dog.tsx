@@ -41,33 +41,30 @@ const Dog = ({
   const onHeadMouseUp = () => setIsBlinking(false);
 
   const startBlinking = async () => {
-    const interval = getRandomRange(1000, 15000);
+    const interval = getRandomRange(1000, 10000);
     await delay(interval);
     setIsBlinking(true);
+    setIsBlinking(false);
     startBlinking();
-  };
-
-  const runBarkLoop = () => {
-    setBarks([...barks, { text: "Woof!", id: new Date().getTime() }]);
-
-    setTimeout(() => {
-      let newBarks = [...barks];
-      newBarks.shift();
-      setBarks(newBarks)
-    }, 3000);
   };
 
   const startBarking = async () => {
     const interval = getRandomRange(500, 2000);
     await delay(interval);
-    runBarkLoop();
+
+    barks.push({ text: "Woof!", id: new Date().getTime() });
+    setBarks(barks);
+
+    setTimeout(() => {
+      barks.shift();
+      setBarks(barks)
+    }, S.BARK_TRANSITION_TIME);
+
     startBarking();
   };
 
-  React.useEffect(() => {
-    startBlinking();
-    if (isBarking) runBarkLoop();
-  });
+  React.useEffect(() => { startBlinking() }, []);
+  // React.useMutationEffect(() => { startBarking() },[]);
 
   return (
     <S.Dog

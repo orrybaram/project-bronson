@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled, { css } from "react-emotion";
 import posed from "react-pose";
-import colors from "../../../../colors";
+import colors from "lib/colors";
 
 export interface HeadStylePropsType {
   baseCoat: string;

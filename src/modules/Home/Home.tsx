@@ -54,12 +54,12 @@ const Home = () => {
     <S.Main backgroundColor={backgroundColor}>
       <Dog {...dogData} />
       <S.Name>{name}</S.Name>
-      <button onClick={saveDog(meta.hash, name)}>⭐</button>
+      {/* <button onClick={saveDog(meta.hash, name)}>⭐</button>
       <List
         loadDog={loadDog}
         starredDogs={starredDogs}
         deleteDog={deleteDog}
-      />
+      /> */}
     </S.Main>
   );
 };

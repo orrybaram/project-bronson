@@ -1,4 +1,4 @@
-import colors from "../../colors";
+import colors from "lib/colors";
 import names from "./names";
 import { getRandomArrayValue } from "lib/utils";
 

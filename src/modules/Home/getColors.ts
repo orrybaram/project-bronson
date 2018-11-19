@@ -1,4 +1,4 @@
-import colors from "../../colors";
+import colors from "lib/colors";
 
 const { red, orange, yellow, green, blue, purple, neutral } = colors;
 
