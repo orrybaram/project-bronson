@@ -92,9 +92,15 @@ export default (): { data: ValuesType; meta: MetaType } => {
 
   let values = generateValues()
   if (isCriticalHit) {
+    const secretDog = craftedDogs[getRandomArrayValue(craftedDogs)];
+    const foundSecretDogsJSON = localStorage.getItem("foundSecretDogs") || "{}";
+    const foundSecretDogs = JSON.parse(foundSecretDogsJSON);
+    foundSecretDogs[secretDog.name] = true;
+    localStorage.setItem('foundSecretDogs', JSON.stringify(foundSecretDogs));
+
     values = {
       ...values,
-      ...craftedDogs[getRandomArrayValue(craftedDogs)],
+      ...secretDog,
     }
   }
 
