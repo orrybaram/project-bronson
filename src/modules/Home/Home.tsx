@@ -45,7 +45,7 @@ export default class Home extends React.Component<PropsType, StateType> {
 
     const {
       data,
-      meta
+      meta,
     }: { data: ValuesType; meta: MetaType } = getGeneratedValues();
 
     const dogsJSON = localStorage.getItem("starredDogs") || "{}";

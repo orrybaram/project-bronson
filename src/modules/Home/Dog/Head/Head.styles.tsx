@@ -11,8 +11,6 @@ export interface HeadStylePropsType {
   underCoat: string;
 }
 
-
-
 const Ear = styled.div`
   position: absolute;
   border-radius: 83px 82px 65px 64px / 106px 127px 33px 27px;
