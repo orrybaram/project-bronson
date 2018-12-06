@@ -2,11 +2,11 @@ import * as React from "react";
 import { getRandomRange, getRandomArrayValue, delay } from "lib/utils";
 import * as S from "./Confetti.styles";
 
-const SPEED_TYPES = ["slow", "medium", "fast"];
-const SHAPE_TYPES = ["round", "rectangle"];
+const SPEED_TYPES: Speed[] = ["slow", "medium", "fast"];
+const SHAPE_TYPES: Shape[] = ["round", "rectangle"];
 
-type Shape = "round" | "rectangle";
-type Speed = "slow" | "medium" | "fast";
+type Shape = 'round' | 'rectangle';
+type Speed = 'slow' | 'medium' | 'fast';
 
 type ConfettiType = {
   id: number;
@@ -17,6 +17,8 @@ type ConfettiType = {
 }[];
 
 const Confetti = () => {
+
+
   const [confetti, setConfetti] = React.useState<ConfettiType>([]);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -27,8 +29,8 @@ const Confetti = () => {
         : 0;
 
     const interval = getRandomRange(100, 300);
-    const speed = SPEED_TYPES[getRandomArrayValue(SPEED_TYPES)];
-    const shape = SHAPE_TYPES[getRandomArrayValue(SHAPE_TYPES)];
+    const speed: Speed = SPEED_TYPES[getRandomArrayValue(SPEED_TYPES)];
+    const shape: Shape = SHAPE_TYPES[getRandomArrayValue(SHAPE_TYPES)];
     const positionX = getRandomRange(0, containerWidth);
     const rotation = getRandomRange(0, 360);
 
@@ -46,7 +48,7 @@ const Confetti = () => {
     setTimeout(() => {
       confetti.shift();
       setConfetti(confetti);
-    }, 15000);
+    }, S.FALLING_DURATION);
 
     dropConfetti();
   };
@@ -63,6 +65,8 @@ const Confetti = () => {
           shape={shape}
           positionX={positionX}
           rotation={rotation}
+          initialPose="falling"
+          pose="falling"
         />
       ))}
     </S.ConfettiContainer>
@@ -70,38 +74,3 @@ const Confetti = () => {
 };
 
 export default Confetti;
-
-// const Confetti = (function () {
-//   const confettiContainer = document.querySelector('.confetti-container');
-//   const animationSpeeds = ['slow', 'medium', 'fast'];
-//   const types = ['round', 'rectangle'];
-//   let renderInterval = null;
-
-//   function render() {
-//     renderInterval = setInterval(() => {
-//       const particle = document.createElement('div');
-
-//       const particleType = types[Math.floor(Math.random() * types.length)];
-//       const particleLeft = (Math.floor(Math.random() * confettiContainer.offsetWidth)) + 'px';
-//       const particleAnimation = animationSpeeds[Math.floor(Math.random() * animationSpeeds.length)];
-
-//       particle.classList.add(
-//         'confetti__particle',
-//         `confetti__particle--animation-${particleAnimation}`,
-//         `confetti__particle--${particleType}`
-//       );
-//       particle.style.left = particleLeft;
-//       particle.style.webkitTransform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
-
-//       particle.removeTimeout = setTimeout(function() {
-//         particle.parentNode.removeChild(particle);
-//       }, 15000);
-
-//       confettiContainer.appendChild(particle);
-//     }, 300);
-//   }
-
-//   return {
-//     render
-//   }
-// })();
