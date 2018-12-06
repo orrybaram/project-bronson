@@ -4,6 +4,7 @@ import Dog from "./Dog";
 import { ValuesType, MetaType } from "./Home.types";
 import List from "./List";
 import * as S from './Home.styles';
+import Confetti from './Confetti';
 
 let viewedDogsCount = Number(localStorage.getItem("viewedDogsCount")) || 0;
 localStorage.setItem("viewedDogsCount", `${(viewedDogsCount += 1)}`);
@@ -60,6 +61,7 @@ const Home = () => {
         starredDogs={starredDogs}
         deleteDog={deleteDog}
       /> */}
+      <Confetti />
     </S.Main>
   );
 };
