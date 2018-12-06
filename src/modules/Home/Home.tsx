@@ -20,6 +20,7 @@ const getDogsFromLocalStorage = () => {
 const Home = () => {
   const [starredDogs, setStarredDogs] = React.useState(initialStarredDogs)
   const [dog, setDog] = React.useState(getGeneratedValues());
+  const hasConfetti = false;
 
   const { data, meta }: { data: ValuesType; meta: MetaType } = dog;
   const { backgroundColor, name, ...dogData } = data;
@@ -61,7 +62,10 @@ const Home = () => {
         starredDogs={starredDogs}
         deleteDog={deleteDog}
       /> */}
-      <Confetti />
+      {hasConfetti &&
+        <Confetti />
+      }
+
     </S.Main>
   );
 };

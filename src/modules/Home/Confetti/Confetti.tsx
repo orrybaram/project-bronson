@@ -4,6 +4,7 @@ import * as S from "./Confetti.styles";
 
 const SPEED_TYPES: Speed[] = ["slow", "medium", "fast"];
 const SHAPE_TYPES: Shape[] = ["round", "rectangle"];
+const CONFETTI_DURATION = 5000;
 
 type Shape = 'round' | 'rectangle';
 type Speed = 'slow' | 'medium' | 'fast';
@@ -17,8 +18,6 @@ type ConfettiType = {
 }[];
 
 const Confetti = () => {
-
-
   const [confetti, setConfetti] = React.useState<ConfettiType>([]);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -48,7 +47,7 @@ const Confetti = () => {
     setTimeout(() => {
       confetti.shift();
       setConfetti(confetti);
-    }, S.FALLING_DURATION);
+    }, CONFETTI_DURATION);
 
     dropConfetti();
   };

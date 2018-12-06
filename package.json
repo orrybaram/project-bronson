@@ -16,6 +16,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
+    "@popmotion/easing": "^1.0.1",
     "@rebass/grid": "^6.0.0-4",
     "@types/lodash": "^4.14.118",
     "@types/react-dom": "^16.0.9",
